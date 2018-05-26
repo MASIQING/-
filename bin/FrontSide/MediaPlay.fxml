@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.media.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="555.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontSide.PlayerControl">
+   <children>
+      <AnchorPane fx:id="mediaPane" prefHeight="505.0" prefWidth="874.0">
+         <children>
+            <MediaView fx:id="mediaView" fitHeight="505.0" fitWidth="874.0" nodeOrientation="INHERIT" onError="#mediaPlay" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="settingPane" layoutY="510.0" prefHeight="45.0" prefWidth="874.0">
+         <children>
+            <Slider fx:id="slider" layoutX="187.0" layoutY="13.0" prefHeight="14.0" prefWidth="506.0" />
+            <Button fx:id="playPause" layoutX="15.0" layoutY="4.0" mnemonicParsing="false" onAction="#pauseAndPlay" opacity="0.6" prefHeight="30.0" prefWidth="30.0" />
+            <Slider fx:id="volumeSlider" layoutX="742.0" layoutY="13.0" prefHeight="14.0" prefWidth="117.0" />
+            <ImageView fx:id="volumeImage" fitHeight="20.0" fitWidth="21.0" layoutX="715.0" layoutY="10.0" opacity="0.59" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../bin/FrontSide/frontSidePicture/volumeSlider.png" />
+               </image></ImageView>
+            <Text fx:id="showTime" layoutX="70.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="97.240234375">
+               <font>
+                  <Font name="AdobeHeitiStd-Regular" size="13.0" />
+               </font></Text>
+            <Line endY="40.0" layoutX="55.0" layoutY="-6.0" startY="12.0" />
+            <Line endY="40.0" layoutX="705.0" layoutY="-6.0" startY="12.0" />
+            <Line endY="40.0" layoutX="5.0" layoutY="-6.0" startY="12.0" />
+            <Line endY="40.0" layoutX="175.0" layoutY="-6.0" startY="12.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

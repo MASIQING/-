@@ -1,0 +1,121 @@
+
+/*左侧选择栏的按钮定义*/
+#But_AllMovie{/*全部影片按钮*/
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/menu.png);
+	-fx-opacity: 0.6;
+}
+#But_AllMovie:hover{
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/menu.png);
+	-fx-border-color: #272727;
+    -fx-border-width: 4;
+}
+
+
+#But_nowPlaying{/*播放器按钮*/
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/play.png);
+	-fx-opacity: 0.6;
+
+}
+#But_nowPlaying:hover{
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/play.png);
+	-fx-border-color: #272727;
+    -fx-border-width: 4;
+}
+
+
+#But_settings{/*设置按钮*/
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/setting.png);
+	-fx-opacity: 0.6;
+}
+#But_settings:hover{
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/setting.png);
+	-fx-border-color: #272727;
+    -fx-border-width: 4;
+}
+
+
+#leftPane{/*左侧界面背景*/
+	-fx-background-color: #0072E3;
+	-fx-background-image:url(/FrontSide/frontSidePicture/blueBG.jpg);
+}
+
+/*电影界面背景*/
+#optionPane{/*设置界面背景*/
+	-fx-background-color: #d0d0d0;
+	-fx-background-image:url(/FrontSide/frontSidePicture/blueBG.jpg);
+	
+}
+
+/*电影界面设置*/
+#right{
+	-fx-background-image:url(/FrontSide/frontSidePicture/right.png);
+}
+#right:hover{
+	-fx-border-color: #4F4F4F;
+	-fx-border-radius: 2;
+    -fx-border-width: 3;
+}
+#left{
+	-fx-background-image:url(/FrontSide/frontSidePicture/left.png);
+}
+#left:hover{
+	-fx-border-color: #4F4F4F;
+	-fx-border-radius: 2;
+    -fx-border-width: 3;
+}
+#subAnchorPane1{
+	-fx-background-image:url(/FrontSide/frontSidePicture/blueBG.jpg);
+}
+#subAnchorPane2{
+	-fx-background-image:url(/FrontSide/frontSidePicture/blueBG.jpg);
+}
+#movieName{
+	-fx-text-fill: #000000;
+}
+
+
+/*播放器界面设置*/
+#slider{
+	-fx-background-color: #d0d0d0;
+}
+#volumeSlider{
+	-fx-background-color: #d0d0d0;
+}
+#mediaPane{
+	-fx-background-color: #000000;
+}
+#settingPane{
+	-fx-background-color: #6C6C6C;
+	-fx-background-image:url(/FrontSide/frontSidePicture/whiteBG.jpg);
+}
+
+/*综合设置*/
+.button{
+	-fx-background-color: #6C6C6C;
+	-fx-text-fill: #FFFFFF;
+	-fx-opacity: 0.8;
+	-fx-border-color: #8E8E8E;
+    -fx-border-width: 1
+}
+.button:hover{
+	-fx-background-color: #E0E0E0;
+	-fx-text-fill: #000000;
+	-fx-border-color: #E0E0E0;
+    -fx-border-width: 1
+}
+
+.split-menu-button{
+	-fx-background-color: #FFFFFF;
+	
+.split-menu-button:hover{
+	-fx-background-color: #d0d0d0;
+	-fx-border-color: #BEBEBE;
+	-fx-border-radius: 4;
+    -fx-border-width: 2;
+}

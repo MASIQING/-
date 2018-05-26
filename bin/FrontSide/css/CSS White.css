@@ -1,0 +1,132 @@
+
+/*左侧选择栏的按钮定义*/
+#But_AllMovie{/*全部影片按钮*/
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/menu.png);
+	-fx-border-color: #ADADAD;
+	-fx-border-radius: 2;
+    -fx-border-width: 2;
+}
+#But_AllMovie:hover{
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/menu.png);
+	-fx-border-color: #4F4F4F;
+	-fx-border-radius: 2;
+    -fx-border-width: 3;
+}
+
+
+#But_nowPlaying{/*播放器按钮*/
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/play.png);
+	-fx-border-color: #ADADAD;
+	-fx-border-radius: 2;
+    -fx-border-width: 2;
+}
+#But_nowPlaying:hover{
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/play.png);
+	-fx-border-color: #4F4F4F;
+	-fx-border-radius: 2;
+    -fx-border-width: 3;
+}
+
+
+#But_settings{/*设置按钮*/
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/setting.png);
+	-fx-border-color: #ADADAD;
+	-fx-border-radius: 2;
+    -fx-border-width: 2;
+}
+#But_settings:hover{
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/setting.png);
+	-fx-border-color: #4F4F4F;
+	-fx-border-radius: 2;
+    -fx-border-width: 3;
+}
+
+
+
+
+
+
+/*左侧界面背景*/
+#leftPane{
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/whiteBG.jpg);
+}
+
+/*电影界面背景*/
+#sub1Pane{
+	-fx-background-color: #F0F0F0;
+	-fx-background-image:url(/FrontSide/frontSidePicture/whiteBG.jpg);
+}
+#listView{
+	-fx-background-color: #4F4F4F;
+}
+
+/*设置界面背景*/
+#optionPane{
+	-fx-background-color: #F0F0F0;
+	-fx-background-image:url(/FrontSide/frontSidePicture/whiteBG.jpg);
+}
+
+
+
+/*电影界面设置*/
+#right{
+	-fx-background-image:url(/FrontSide/frontSidePicture/right.png);
+}
+#right:hover{
+	-fx-border-color: #4F4F4F;
+	-fx-border-radius: 2;
+    -fx-border-width: 3;
+}
+#left{
+	-fx-background-image:url(/FrontSide/frontSidePicture/left.png);
+}
+#left:hover{
+	-fx-border-color: #4F4F4F;
+	-fx-border-radius: 2;
+    -fx-border-width: 3;
+}
+
+/*播放器界面设置*/
+#slider{
+	-fx-background-color: #d0d0d0;
+}
+#volumeSlider{
+	-fx-background-color: #d0d0d0;
+}
+#mediaPane{
+	-fx-background-color: #000000;
+}
+#settingPane{
+	-fx-background-image:url(/FrontSide/frontSidePicture/whiteBG.jpg);
+}
+
+
+.button{
+	-fx-background-color: #E0E0E0;
+	-fx-border-color: #FFFFFF;
+	-fx-border-radius: 0;
+    -fx-border-width: 1;
+	-fx-background-radius: 0;  
+
+}
+.button:hover{
+	-fx-background-color: #d0d0d0;
+	-fx-background-radius: 0;  
+}
+
+.split-menu-button{
+	-fx-background-color: #FFFFFF;
+	
+.split-menu-button:hover{
+	-fx-background-color: #d0d0d0;
+	-fx-border-color: #BEBEBE;
+	-fx-border-radius: 4;
+    -fx-border-width: 2;
+}

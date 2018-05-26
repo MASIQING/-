@@ -1,0 +1,28 @@
+
+/*左侧选择栏的按钮定义*/
+#But_AllMovie{/*全部影片按钮*/
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/menu.png);
+	
+}
+#But_nowPlaying{/*播放器按钮*/
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/play.png);
+	
+
+}
+#But_settings{/*设置按钮*/
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/setting.png);
+	
+}
+
+#leftPane{/*左侧界面背景*/
+	-fx-background-color: #4F4F4F;
+	-fx-background-image:url(/FrontSide/frontSidePicture/blackBG.jpg);
+}
+
+#optionPane{/*设置界面背景*/
+	-fx-background-color: #d0d0d0;
+	-fx-background-image:url(/FrontSide/frontSidePicture/blackBG.jpg);
+}

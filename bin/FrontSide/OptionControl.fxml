@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="optionPane" prefHeight="555.0" prefWidth="866.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontSide.OptionControl">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1e3e4" height="505.0" layoutX="52.0" layoutY="27.0" opacity="0.4" stroke="#fcf9f9" strokeType="INSIDE" width="358.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1e3e4" height="505.0" layoutX="444.0" layoutY="27.0" opacity="0.4" stroke="#fcf9f9" strokeType="INSIDE" width="358.0" />
+      <SplitMenuButton fx:id="selectCSS" layoutX="73.0" layoutY="43.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="241.0" text="界面主题       ">
+        <items>
+          <MenuItem fx:id="selectWhite" mnemonicParsing="false" onAction="#selectWhite" text="浅色主题" />
+          <MenuItem fx:id="selectBlack" mnemonicParsing="false" onAction="#selectBlack" text="暗夜黑" />
+            <MenuItem fx:id="selectBlue" mnemonicParsing="false" onAction="#selectBlue" text="深海蓝" />
+        </items>
+      </SplitMenuButton>
+      <SplitMenuButton fx:id="selectLanguage" layoutX="73.0" layoutY="85.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="241.0" text="语言 Language">
+         <items>
+            <MenuItem fx:id="setChinese" mnemonicParsing="false" onAction="#selectChinese" text="简体中文" />
+            <MenuItem fx:id="setEnglish" mnemonicParsing="false" onAction="#selectEnglish" text="English" />
+            <MenuItem fx:id="setFrench" mnemonicParsing="false" onAction="#selectFrench" text="Français" />
+         </items>
+      </SplitMenuButton>
+      <Button fx:id="confirm" layoutX="268.0" layoutY="485.0" mnemonicParsing="false" onAction="#confirmClicked" prefHeight="30.0" prefWidth="127.0" text="应用" />
+      <Slider fx:id="lightSlider" layoutX="130.0" layoutY="147.0" prefHeight="14.0" prefWidth="188.0" />
+      <ImageView fx:id="lightImage" fitHeight="40.0" fitWidth="40.0" layoutX="73.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
