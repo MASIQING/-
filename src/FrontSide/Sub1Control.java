@@ -1,34 +1,34 @@
 package FrontSide;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-
-import com.sun.javafx.scene.control.behavior.TabPaneBehavior;
+import java.util.Map.Entry;
+import java.util.Properties;
+import java.util.Set;
 
 import Data.MainMovieData;
 import Data.MovieManager;
 import Data.WebCrawerTools;
-//import coding.webscraping;
-import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class Sub1Control  {
 	private MainMovieData moviedata;
 	@FXML private AnchorPane Sub1Pane;
+	@FXML private AnchorPane subAnchorPane1;
+	@FXML private AnchorPane subAnchorPane2;
+	@FXML private ScrollPane scrollPane;
+	@FXML private GridPane gridPane;
+	@FXML private ImageView movieInformImage;
 	@FXML private ImageView imageView1;
 	@FXML private ImageView imageView2;
 	@FXML private ImageView imageView3;
@@ -46,9 +46,6 @@ public class Sub1Control  {
 	@FXML private Button music;
 	@FXML private Button adventure;
 	@FXML private Button child;
-	@FXML private AnchorPane subAnchorPane1;
-	@FXML private AnchorPane subAnchorPane2;
-	@FXML private ImageView movieInformImage;
 	@FXML private Button chinese;
 	@FXML private Button europeAndUS;
 	@FXML private Button japanAndKorea;
@@ -57,10 +54,10 @@ public class Sub1Control  {
 	@FXML private Button left;
 	@FXML private Button nowPlay;
 	@FXML private Button backToMenu;
-	@FXML private ScrollPane scrollPane;
 	@FXML private Text movieCountry;
 	@FXML private Text movieName; 
 	@FXML private Text movieInform;
+	
 	private int showIndex = 0;
 	private PlayerControl playerControl;
 	private AnchorPane centrePane;
@@ -69,13 +66,14 @@ public class Sub1Control  {
 	private String[] showList = new String[5];
 	private int x = 1;
 	private int y = 2;
-	boolean english = false;
+	private String language = "CHINESE";
 	boolean leftRun = false;
 	boolean rightRun = true;
 	
 	public Sub1Control() {
 		Platform.runLater(new Runnable() {
 			@Override
+			
 			public void run() {
 				setMovieData(new MainMovieData());
 			}
@@ -85,12 +83,49 @@ public class Sub1Control  {
 	public void setFatherControler(PlayerControl playerControl
 			                    ,AnchorPane centrePane
 			                    ,Parent root) {
-		 
 		this.playerControl = playerControl;
 		this.centrePane = centrePane;
 		this.root = root;
-		System.out.println("pc "+playerControl+" cp "+centrePane+" rt "+root);
+	}
+	
+	public void changeLanguage(String language) {
+		System.out.println("Change language to "+language);
+		this.language = language;
+		Properties pps = new Properties();
+		try {
+			FileInputStream inputStream = new FileInputStream("Language.properties");
+			pps.load(new InputStreamReader(inputStream, "UTF-8"));
+			
+			if(language.equals("ENGLISH")) {
+				
+				for(int i = 0;i<gridPane.getChildren().size();i++) {
+					Button but = (Button)gridPane.getChildren().get(i);
+					but.setText(pps.getProperty(but.getText()));
+				}
+				nowPlay.setText(pps.getProperty("立即播放"));
+				backToMenu.setText(pps.getProperty("返回"));
+			}else if(language.equals("CHINESE")) {
+				for(int i = 0;i<gridPane.getChildren().size();i++) {
+					Button but = (Button)gridPane.getChildren().get(i);
+	
+					Set<Entry<Object, Object>> entries = pps.entrySet();
+					for (Entry entry : entries) {
+						if (but.getText().equals(entry.getValue())) {
+							but.setText(entry.getKey().toString());break;
+						}  
+					}
+				}
+				nowPlay.setText(pps.getProperty("立即播放"));
+				backToMenu.setText(pps.getProperty("返回"));
+			}
+			if(nowMovieUrl!=null) showInformSet(nowMovieUrl);
+			
+		} catch (IOException e) {
+			System.out.println("Properties file missing");
+			e.printStackTrace();
+		}
 		
+
 	}
 	
 	@FXML 
@@ -153,6 +188,7 @@ public class Sub1Control  {
 	public void clickBackToMenu() {
 		System.out.println("buckToMenu Clicked");
 		subAnchorPane2.setVisible(false);
+		nowMovieUrl = null;
 		subAnchorPane1.setVisible(true);
 	}
 	
@@ -179,6 +215,7 @@ public class Sub1Control  {
 	}
 	
 	private void showInformSet(String url) {
+		
 		movieName.setText(null);
 		movieInform.setText(null);
 		MovieManager movieManager = new MovieManager();
@@ -193,7 +230,7 @@ public class Sub1Control  {
 		}
 		
 		String name = movieIfm2[1];
-		if(english == false) {
+		if(language.equals("CHINESE")) {
 			String reg = "[^\\u4e00-\\u9fa5]";
 			String finalName = name.replaceAll(reg, "")+"  "+movieIfm2[5];
 			movieName.setText(finalName);
@@ -203,12 +240,13 @@ public class Sub1Control  {
 			movieInform.setText(introduction);
 			movieCountry.setText(movieIfm2[4]);
 			
-		}else {
-			String reg = "[A-z]";
+		}else if(language.equals("ENGLISH")){
+			String reg = "[^A-z]";
 			String finalName = name.replaceAll(reg, "")+"  "+movieIfm2[5];
 			movieName.setText(finalName);
 			movieCountry.setText(movieIfm2[4]);
 		}
+	
 	}
 	
 	private void initialClear() {

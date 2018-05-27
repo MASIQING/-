@@ -88,7 +88,7 @@ public class MenuControl {
 		        opRoot = (javafx.scene.Parent) fxmlLoader.load(
 		                       getClass().getResource("OptionControl.fxml").openStream());
 		        opControl=(OptionControl)fxmlLoader.getController();
-		        opControl.setControler(opRoot, sbRoot, pcRoot,mcRoot);
+		        opControl.setRoot(opRoot, sbRoot, pcRoot,mcRoot);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				System.out.println(" Some module of OptionControl was missing ");
@@ -134,10 +134,9 @@ public class MenuControl {
 	public void clickedSettings() {
 			
 			centrePane.getChildren().clear();
-			opControl.setControler(opRoot, sbRoot, pcRoot,mcRoot);
+			opControl.setRoot(opRoot, sbRoot, pcRoot,mcRoot);
+			opControl.setControler(sub1Control);
 			centrePane.getChildren().addAll(opRoot);	
-			
-	
 	}
 	
     public void setParent(Parent mcRoot) {

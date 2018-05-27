@@ -23,11 +23,9 @@
          <items>
             <MenuItem fx:id="setChinese" mnemonicParsing="false" onAction="#selectChinese" text="简体中文" />
             <MenuItem fx:id="setEnglish" mnemonicParsing="false" onAction="#selectEnglish" text="English" />
-            <MenuItem fx:id="setFrench" mnemonicParsing="false" onAction="#selectFrench" text="Français" />
          </items>
       </SplitMenuButton>
-      <Button fx:id="confirm" layoutX="268.0" layoutY="485.0" mnemonicParsing="false" onAction="#confirmClicked" prefHeight="30.0" prefWidth="127.0" text="应用" />
-      <Slider fx:id="lightSlider" layoutX="130.0" layoutY="147.0" prefHeight="14.0" prefWidth="188.0" />
+      <Button fx:id="confirm" layoutX="259.0" layoutY="483.0" mnemonicParsing="false" onAction="#confirmClicked" prefHeight="30.0" prefWidth="127.0" text="应用" />
       <ImageView fx:id="lightImage" fitHeight="40.0" fitWidth="40.0" layoutX="73.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
