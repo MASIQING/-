@@ -11,7 +11,6 @@ import java.util.Set;
 import Data.MainMovieData;
 import Data.MovieManager;
 import Data.WebCrawerTools;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
@@ -65,155 +64,29 @@ public class Sub1Control  {
 	private Parent root;
 	private String nowMovieUrl = null;
 	private String[] showList = new String[5];
-	private int x = 1;
-	private int y = 2;
 	private String language = "CHINESE";
 	boolean leftRun = false;
 	boolean rightRun = true;
 	
-	public Sub1Control() {
-		Platform.runLater(new Runnable() {
-			@Override
-			
-			public void run() {
-				setMovieData(new MainMovieData());
-			}
-		});
-	}
+	
 	
 	public void setFatherControler(PlayerControl playerControl
-			                    ,AnchorPane centrePane
-			                    ,Parent root) {
+			                      ,AnchorPane centrePane
+			                      ,Parent root) {
 		this.playerControl = playerControl;
 		this.centrePane = centrePane;
 		this.root = root;
 	}
 	
-	public void changeLanguage(String language) {
-		System.out.println("Change language to "+language);
-		this.language = language;
-		Properties pps = new Properties();
-		try {
-			FileInputStream inputStream = new FileInputStream("Language.properties");
-			pps.load(new InputStreamReader(inputStream, "UTF-8"));
-			
-			if(language.equals("ENGLISH")) {
-				
-				for(int i = 0;i<gridPane.getChildren().size();i++) {
-					Button but = (Button)gridPane.getChildren().get(i);
-					but.setText(pps.getProperty(but.getText()));
-				}
-				nowPlay.setText(pps.getProperty("立即播放"));
-				backToMenu.setText(pps.getProperty("返回"));
-			}else if(language.equals("CHINESE")) {
-				for(int i = 0;i<gridPane.getChildren().size();i++) {
-					Button but = (Button)gridPane.getChildren().get(i);
-	
-					Set<Entry<Object, Object>> entries = pps.entrySet();
-					for (Entry entry : entries) {
-						if (but.getText().equals(entry.getValue())) {
-							but.setText(entry.getKey().toString());break;
-						}  
-					}
-				}
-				nowPlay.setText(pps.getProperty("立即播放"));
-				backToMenu.setText(pps.getProperty("返回"));
-			}
-			if(nowMovieUrl!=null) showInformSet(nowMovieUrl);
-			
-		} catch (IOException e) {
-			System.out.println("Properties file missing");
-			e.printStackTrace();
-		}
-		
-
-	}
 	
 	@FXML 
 	public void initialize() {
 		subAnchorPane2.setVisible(false);
 		MovieManager movieManager = new MovieManager();
+		setMovieData(new MainMovieData());
 	}
 	
-	@FXML
-	public void clickView1() {
-		System.out.println("Click View 1");
-        subAnchorPane1.setVisible(false);
-        Image image = imageView1.getImage();
-        movieInformImage.setImage(image);
-        nowMovieUrl = showList[0]; 
-        showInformSet(nowMovieUrl);
-	}
-	@FXML
-	public void clickView2() {
-		System.out.println("Click View 2");
-		subAnchorPane1.setVisible(false);
-		subAnchorPane2.setVisible(true);
-		Image image = imageView2.getImage();
-	    movieInformImage.setImage(image);
-	    nowMovieUrl = showList[1]; 
-	    showInformSet(nowMovieUrl);
-	}
-	@FXML
-	public void clickView3() {
-		System.out.println("Click View 3");
-		subAnchorPane1.setVisible(false);
-		subAnchorPane2.setVisible(true);
-		Image image = imageView3.getImage();
-	    movieInformImage.setImage(image);
-	    nowMovieUrl = showList[2]; 
-	    showInformSet(nowMovieUrl);
-	}
-	@FXML
-	public void clickView4() {
-		System.out.println("Click View 4");
-		subAnchorPane1.setVisible(false);
-		subAnchorPane2.setVisible(true);
-        Image image = imageView4.getImage();
-	    movieInformImage.setImage(image);
-	    nowMovieUrl = showList[3]; 
-	    showInformSet(nowMovieUrl);
-	}
-	@FXML
-	public void clickView5() {
-		System.out.println("Click View 5");
-		subAnchorPane1.setVisible(false);
-		subAnchorPane2.setVisible(true);
-	    Image image = imageView5.getImage();
-	    movieInformImage.setImage(image);
-	    nowMovieUrl = showList[4];  
-	    showInformSet(nowMovieUrl);
-	}
 	
-	@FXML 
-	public void clickBackToMenu() {
-		System.out.println("buckToMenu Clicked");
-		subAnchorPane2.setVisible(false);
-		nowMovieUrl = null;
-		subAnchorPane1.setVisible(true);
-	}
-	
-	@FXML
-	public void clickNowPlay() {
-		subAnchorPane2.setVisible(false);
-		subAnchorPane1.setVisible(true);
-	
-		MovieManager movieManager = new MovieManager();
-		String[][] movieIfm = movieManager.getAllMovieInformation();
-		String []movieIfm2 = new String[6];
-		
-		for(int i = 0;i<movieIfm.length;i++) {
-			if(movieIfm[i][2].equals(nowMovieUrl)) {
-				movieIfm2 = movieIfm[i];
-				break;
-			}
-		}
-		
-		playerControl.stop();
-		playerControl.setMediaURL("movie\\"+movieIfm2[3]);
-		playerControl.mediaPlay();
-		this.centrePane.getChildren().addAll(root);
-	}
 	
 	private void showInformSet(String url) {
 		
@@ -292,6 +165,45 @@ public class Sub1Control  {
 		imageView5.setImage(null);
 	}
 
+	public void changeLanguage(String language) {
+		System.out.println("Change language to "+language);
+		this.language = language;
+		Properties pps = new Properties();
+		try {
+			FileInputStream inputStream = new FileInputStream("Language.properties");
+			pps.load(new InputStreamReader(inputStream, "UTF-8"));
+			
+			if(language.equals("ENGLISH")) {
+				
+				for(int i = 0;i<gridPane.getChildren().size();i++) {
+					Button but = (Button)gridPane.getChildren().get(i);
+					but.setText(pps.getProperty(but.getText()));
+				}
+				nowPlay.setText(pps.getProperty("立即播放"));
+				backToMenu.setText(pps.getProperty("返回"));
+			}else if(language.equals("CHINESE")) {
+				for(int i = 0;i<gridPane.getChildren().size();i++) {
+					Button but = (Button)gridPane.getChildren().get(i);
+	
+					Set<Entry<Object, Object>> entries = pps.entrySet();
+					for (Entry entry : entries) {
+						if (but.getText().equals(entry.getValue())) {
+							but.setText(entry.getKey().toString());break;
+						}  
+					}
+				}
+				nowPlay.setText(pps.getProperty("立即播放"));
+				backToMenu.setText(pps.getProperty("返回"));
+			}
+			if(nowMovieUrl!=null) showInformSet(nowMovieUrl);
+			
+		} catch (IOException e) {
+			System.out.println("Properties file missing");
+			e.printStackTrace();
+		}
+		
+
+	}
 	
 	private void rightAction(ArrayList<String> PicUrl) {
 		initialClear();
@@ -383,24 +295,90 @@ public class Sub1Control  {
 		this.moviedata = moviedata;
 		ArrayList<String> PicUrl = moviedata.getMovieImageViewList();
 		frontSideControl(PicUrl);
-		
 	}
 	
-	public void selectTypeAction(String type) {
+	private void selectTypeAction(String type) {
 		MainMovieData moviedata = new MainMovieData();
 		ArrayList<String> PicUrl = moviedata.getTypeMovieImageViewlist(type);
 		initialClear();
 		frontSideControl(PicUrl);
 	}
     
-	@FXML
-	public void clickall() {
-				MainMovieData moviedata = new MainMovieData();
-				ArrayList<String> PicUrl =  moviedata.getMovieImageViewList();
-				initialClear();
-				frontSideControl(PicUrl);
+	private void viewOperation(int id) {
+        subAnchorPane1.setVisible(false);
+        subAnchorPane2.setVisible(true);
+        Image image = null;
+        switch(id) {
+        case 1: image = imageView1.getImage();break;
+        case 2: image = imageView2.getImage();break;
+        case 3: image = imageView3.getImage();break;
+        case 4: image = imageView4.getImage();break;
+        case 5: image = imageView5.getImage();break;
+        }
+        movieInformImage.setImage(image);
+        nowMovieUrl = showList[id-1]; 
+        showInformSet(nowMovieUrl);
+	}
+	
+	private void ShowPic(String picurl,int id) {
+		Image img = new Image(Sub1Control.class.getResourceAsStream("moviePicture\\"+picurl));
+		switch(id) {
+		case 1:imageView1.setImage(img);break;
+		case 2:imageView2.setImage(img);break;
+		case 3:imageView3.setImage(img);break;
+		case 4:imageView4.setImage(img);break;
+		case 5:imageView5.setImage(img);break;
+		}
 	}
 
+	
+	@FXML 
+	public void clickBackToMenu() {
+		subAnchorPane2.setVisible(false);
+		nowMovieUrl = null;
+		subAnchorPane1.setVisible(true);
+	}
+	
+	@FXML
+	public void clickNowPlay() {
+		subAnchorPane2.setVisible(false);
+		subAnchorPane1.setVisible(true);
+	
+		MovieManager movieManager = new MovieManager();
+		String[][] movieIfm = movieManager.getAllMovieInformation();
+		String []movieIfm2 = new String[6];
+		
+		for(int i = 0;i<movieIfm.length;i++) {
+			if(movieIfm[i][2].equals(nowMovieUrl)) {
+				movieIfm2 = movieIfm[i];
+				break;
+			}
+		}
+		
+		playerControl.stop();
+		playerControl.setMediaURL("movie\\"+movieIfm2[3]);
+		playerControl.mediaPlay();
+		this.centrePane.getChildren().addAll(root);
+	}
+	
+	@FXML
+	public void clickall() {
+		MainMovieData moviedata = new MainMovieData();
+		ArrayList<String> PicUrl =  moviedata.getMovieImageViewList();
+		initialClear();
+		frontSideControl(PicUrl);
+	}
+    
+	@FXML
+	public void clickView1() {viewOperation(1);}
+	@FXML
+	public void clickView2() {viewOperation(2);}
+	@FXML
+	public void clickView3() {viewOperation(3);}
+	@FXML
+	public void clickView4() {viewOperation(4);}
+	@FXML
+	public void clickView5() {viewOperation(5);}
 	@FXML
 	public void clickSciencefiction() {selectTypeAction("科幻");}
 	@FXML
@@ -431,18 +409,4 @@ public class Sub1Control  {
 	public void clickJPKA() {selectTypeAction("日韩");}
 	@FXML
 	public void clickOther() {selectTypeAction("其他");}
-	
-	
-	private void ShowPic(String picurl,int id) {
-		Image img = new Image(Sub1Control.class.getResourceAsStream("moviePicture\\"+picurl));
-		switch(id) {
-		case 1:imageView1.setImage(img);break;
-		case 2:imageView2.setImage(img);break;
-		case 3:imageView3.setImage(img);break;
-		case 4:imageView4.setImage(img);break;
-		case 5:imageView5.setImage(img);break;
-		}
-	}
-
-
 }

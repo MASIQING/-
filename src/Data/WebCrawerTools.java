@@ -59,7 +59,7 @@ public class WebCrawerTools {
 			if(c>=0) content = content.substring(0,c)+".";
 		} catch (IOException e) {
 			content = "Sorry, we don't have the introduction of this movie";
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return content;
 	}

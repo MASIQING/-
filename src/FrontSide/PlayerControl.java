@@ -1,16 +1,12 @@
 package FrontSide;
 
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
@@ -19,7 +15,7 @@ import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class PlayerControl implements KeyListener{
+public class PlayerControl {
 	    
 	    //播放器界面 (FXML变量)
 		@FXML private Button playPause;
@@ -78,13 +74,10 @@ public class PlayerControl implements KeyListener{
 			try{	
 				//获取视频URL 并创建媒体对象
 				String mediaURL = getClass().getResource(mediaLocation).toString(); //需要把多媒体文件放置到out目录上的运行class目录树下
-				System.out.println("mediaURL  "+mediaURL);
 				Media media = new Media(mediaURL);		
 				//创建播放器对象
 				mediaPlayer = new MediaPlayer(media);
-				mediaPlayer.setAutoPlay(true); //设置自动播放
-                
-				System.out.println("Width"+media.getWidth());
+				mediaPlayer.setAutoPlay(true);
 				
 				//创建媒体播放视图，并开始播放
 				mediaView.setMediaPlayer(mediaPlayer);
@@ -117,11 +110,8 @@ public class PlayerControl implements KeyListener{
 		            	double endTime = mediaPlayer.getStopTime().toMillis();
 						double startTime = (new_val.doubleValue()/100)*endTime;
 						mediaPlayer.stop();
-						System.out.println("Stop");
 						mediaPlayer.setStartTime(Duration.millis(startTime));
-						//mediaPlayer.
 						mediaPlayer.play();
-						//playPause.setText("暂停");
 						playPause.getStylesheets().clear();
 						playPause.getStylesheets().addAll(getClass().getResource("css\\CSS Button Paused.css").toExternalForm());
 		            }
@@ -191,20 +181,5 @@ public class PlayerControl implements KeyListener{
 		    changed = minutes+ ":" +seconds;
 			return changed;
 		}
-		@Override
-		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
-			System.out.println(e.getKeyCode());
-			
-		}
-		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		
 }
