@@ -43,10 +43,10 @@
                   <Button fx:id="music" mnemonicParsing="false" onMouseClicked="#clickMusic" prefHeight="46.25" prefWidth="110.0" text="音乐" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Button fx:id="adventure" mnemonicParsing="false" onMouseClicked="#clickAdventure" prefHeight="46.25" prefWidth="110.0" text="冒险" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <Button fx:id="sciencefiction" mnemonicParsing="false" onMouseClicked="#clickSciencefiction" prefHeight="46.25" prefWidth="110.0" text="科幻" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <Button fx:id="chinese" mnemonicParsing="false" prefHeight="30.0" prefWidth="139.0" text="中国" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <Button fx:id="europeAndUS" mnemonicParsing="false" prefHeight="64.0" prefWidth="108.0" text="欧美" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                  <Button fx:id="japanAndKorea" mnemonicParsing="false" prefHeight="30.0" prefWidth="129.0" text="日韩" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                  <Button fx:id="other" mnemonicParsing="false" prefHeight="30.0" prefWidth="118.0" text="其他" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                  <Button fx:id="chinese" mnemonicParsing="false" onMouseClicked="#clickChinese" prefHeight="30.0" prefWidth="139.0" text="中国" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Button fx:id="europeAndUS" mnemonicParsing="false" onMouseClicked="#clickEUUS" prefHeight="64.0" prefWidth="108.0" text="欧美" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <Button fx:id="japanAndKorea" mnemonicParsing="false" onMouseClicked="#clickJPKA" prefHeight="30.0" prefWidth="129.0" text="日韩" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                  <Button fx:id="other" mnemonicParsing="false" onMouseClicked="#clickOther" prefHeight="30.0" prefWidth="118.0" text="其他" GridPane.columnIndex="7" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <Line endX="862.0" stroke="#757575" strokeWidth="3.0" />
@@ -66,19 +66,24 @@
             <ImageView fx:id="movieInformImage" fitHeight="470.0" fitWidth="360.0" layoutX="51.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="backToMenu" layoutX="471.0" layoutY="466.0" mnemonicParsing="false" onAction="#clickBackToMenu" prefHeight="40.0" prefWidth="161.0" text="返回" />
             <Button fx:id="nowPlay" layoutX="649.0" layoutY="466.0" mnemonicParsing="false" onAction="#clickNowPlay" prefHeight="40.0" prefWidth="151.0" text="立即播放" />
-            <Text fx:id="movieName" layoutX="452.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0">
+            <Text fx:id="movieName" layoutX="452.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="360.0">
                <font>
                   <Font name="Microsoft YaHei" size="35.0" />
                </font>
             </Text>
-            <Text fx:id="movieInform" layoutX="452.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="360.0">
+            <Text fx:id="movieYear" layoutX="465.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="190.0">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Microsoft YaHei" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="movieCountry" layoutX="452.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="360.0">
+            <Text fx:id="movieCountry" layoutX="554.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="190.0">
                <font>
-                  <Font name="Microsoft YaHei" size="25.0" />
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+            </Text>
+            <Text fx:id="movieInform" layoutX="469.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="360.0">
+               <font>
+                  <Font size="14.0" />
                </font>
             </Text>
          </children>

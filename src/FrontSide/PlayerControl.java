@@ -102,7 +102,9 @@ public class PlayerControl implements KeyListener{
 			    timer = new Timer();
 	    		timer.schedule(new TimerTask() {
 	    			public void run() {
-	    				slideControl();	
+	    				try {
+	    					slideControl();
+	    				}catch(Exception e) {}
 	    			}
 	    		}, 0, 100);
                 
@@ -129,7 +131,7 @@ public class PlayerControl implements KeyListener{
 			    volumeSlider.valueProperty().addListener((
 			            ObservableValue<? extends Number> ov, 
 			            Number old_val, Number new_val) -> {
-			            	 mediaPlayer.setVolume(new_val.doubleValue()/400);
+			            	 mediaPlayer.setVolume(new_val.doubleValue()/50);
 			            });
 	            
 			    

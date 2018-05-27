@@ -36,6 +36,7 @@ public class SceneStart extends Application{
 	    primaryStage.setScene(scene);
 		//设置窗口名称
 		primaryStage.setTitle("Test vision 0.1");
+		primaryStage.setResizable(false);
 		//显示窗口
 		primaryStage.show();
 		

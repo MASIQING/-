@@ -56,6 +56,7 @@ public class Sub1Control  {
 	@FXML private Button backToMenu;
 	@FXML private Text movieCountry;
 	@FXML private Text movieName; 
+	@FXML private Text movieYear;
 	@FXML private Text movieInform;
 	
 	private int showIndex = 0;
@@ -231,20 +232,54 @@ public class Sub1Control  {
 		
 		String name = movieIfm2[1];
 		if(language.equals("CHINESE")) {
-			String reg = "[^\\u4e00-\\u9fa5]";
-			String finalName = name.replaceAll(reg, "")+"  "+movieIfm2[5];
-			movieName.setText(finalName);
+			int i = name.indexOf("&");
+			int j = name.substring(i).indexOf("/");
+			int k = name.substring(i).indexOf("-");
+			System.out.println("i "+i+" j "+j+" k "+k);
+			String showName = name.substring(i);
+			if(j>=0) showName = name.substring(i+1, j+i);
+			else showName = name.substring(i+1,k+i);
+			movieName.setText(showName);
+			movieYear.setText(movieIfm2[5]);
 			
+			String searchName = name.substring(i+1);
+			searchName = name.substring(i+1,k+i);
 			WebCrawerTools crawer = new WebCrawerTools();
-			String introduction = crawer.PA(name.replaceAll(reg, ""));
+			String introduction = crawer.paZhongWen(searchName);
+			System.out.println("SearchName  "+searchName);
 			movieInform.setText(introduction);
-			movieCountry.setText(movieIfm2[4]);
+			
+			String reg = "[^\\u4e00-\\u9fa5 |]";
+			String reg2 = "[|]";
+			String countryName = movieIfm2[4].replaceAll(reg, "").replaceAll(reg2, " ");
+			movieCountry.setText(countryName);
+			
 			
 		}else if(language.equals("ENGLISH")){
-			String reg = "[^A-z]";
-			String finalName = name.replaceAll(reg, "")+"  "+movieIfm2[5];
-			movieName.setText(finalName);
-			movieCountry.setText(movieIfm2[4]);
+			int i = name.indexOf("$");
+			int j = name.substring(i).indexOf("(");
+			int k = name.substring(i).indexOf("-");
+			
+			String showName = name.substring(i);
+			if(j>=0) showName = name.substring(i+1, j+i);
+			else showName = name.substring(i+1,k+i);
+			movieName.setText(showName.replaceAll("[^A-z ]", "")
+					  .replaceAll("[_]", " "));
+			movieYear.setText(movieIfm2[5]);
+			
+			String searchName = name.substring(i+1);
+			searchName = name.substring(i+1,k+i);
+			WebCrawerTools crawer = new WebCrawerTools();
+			System.out.println("SearchName  "+searchName);
+			String introduction = crawer.paYingWen(searchName);
+			movieInform.setText(introduction);
+			
+			String reg = "[^A-z |]";
+			String reg2 = "[|]";
+			String countryName = movieIfm2[4].replaceAll(reg, "").replaceAll(reg2, " ");
+			movieCountry.setText(countryName);
+			
+			
 		}
 	
 	}
@@ -350,163 +385,54 @@ public class Sub1Control  {
 		frontSideControl(PicUrl);
 		
 	}
-
+	
+	public void selectTypeAction(String type) {
+		MainMovieData moviedata = new MainMovieData();
+		ArrayList<String> PicUrl = moviedata.getTypeMovieImageViewlist(type);
+		initialClear();
+		frontSideControl(PicUrl);
+	}
+    
+	@FXML
 	public void clickall() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
 				MainMovieData moviedata = new MainMovieData();
 				ArrayList<String> PicUrl =  moviedata.getMovieImageViewList();
 				initialClear();
 				frontSideControl(PicUrl);
-			}
-		});
 	}
 
-	public void clickSciencefiction() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				MainMovieData moviedata = new MainMovieData();
-				String type = "¿Æ»Ã";
-				ArrayList<String> PicUrl = moviedata.getTypeMovieImageViewlist(type);
-				initialClear();
-				frontSideControl(PicUrl);
-			}
-		});
-	}
+	@FXML
+	public void clickSciencefiction() {selectTypeAction("¿Æ»Ã");}
+	@FXML
+	public void clickComedy() {selectTypeAction("Ï²¾ç");}
+	@FXML
+	public void clickTragedy() {selectTypeAction("±¯¾ç");}
+	@FXML
+	public void clicklove() {selectTypeAction("°®Çé");}
+	@FXML
+	public void clickAction() {selectTypeAction("¶¯×÷");}	
+	@FXML
+	public void clickHorrible() {selectTypeAction("¿Ö²À");}	
+	@FXML
+	public void clickSuspense() {selectTypeAction("ÐüÒÉ");}	
+	@FXML
+	public void clickHistory() {selectTypeAction("ÀúÊ·");}	
+	@FXML
+	public void clickMusic() {selectTypeAction("ÒôÀÖ");}	
+	@FXML
+	public void clickAdventure() {selectTypeAction("Ã°ÏÕ");}	
+	@FXML
+	public void clickChild() {selectTypeAction("¶ùÍ¯");}
+	@FXML
+	public void clickChinese() {selectTypeAction("ÖÐ¹ú");}
+	@FXML
+	public void clickEUUS() {selectTypeAction("Å·ÃÀ");}
+	@FXML
+	public void clickJPKA() {selectTypeAction("ÈÕº«");}
+	@FXML
+	public void clickOther() {selectTypeAction("ÆäËû");}
 	
-	public void clickComedy() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				MainMovieData moviedata = new MainMovieData();
-				String type = "Ï²¾ç";
-				ArrayList<String> PicUrl = moviedata.getTypeMovieImageViewlist(type);
-				initialClear();
-				frontSideControl(PicUrl);
-			}
-		});
-	}
 	
-	public void clickTragedy() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				MainMovieData moviedata = new MainMovieData();
-				String type = "±¯¾ç";
-				ArrayList<String> PicUrl = moviedata.getTypeMovieImageViewlist(type);
-				initialClear();
-				frontSideControl(PicUrl);
-			}
-		});
-	}
-
-	public void clicklove() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				MainMovieData moviedata = new MainMovieData();
-				String type = "°®Çé";
-				ArrayList<String> PicUrl = moviedata.getTypeMovieImageViewlist(type);
-				System.out.println(PicUrl);
-				initialClear();
-				frontSideControl(PicUrl);
-			}
-		});
-	}
-	
-	public void clickAction() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				MainMovieData moviedata = new MainMovieData();
-				String type = "¶¯×÷";
-				ArrayList<String> PicUrl = moviedata.getTypeMovieImageViewlist(type);
-				initialClear();
-				frontSideControl(PicUrl);
-			}
-		});
-	}
-	
-	public void clickHorrible() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				MainMovieData moviedata = new MainMovieData();
-				String type = "¿Ö²À";
-				ArrayList<String> PicUrl = moviedata.getTypeMovieImageViewlist(type);
-				initialClear();
-				frontSideControl(PicUrl);
-			}
-		});
-	}
-	
-	public void clickSuspense() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				MainMovieData moviedata = new MainMovieData();
-				String type = "ÐüÒÉ";
-				ArrayList<String> PicUrl = moviedata.getTypeMovieImageViewlist(type);
-				initialClear();
-				frontSideControl(PicUrl);
-			}
-		});
-	}
-	
-	public void clickHistory() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				MainMovieData moviedata = new MainMovieData();
-				String type = "ÀúÊ·";
-				ArrayList<String> PicUrl = moviedata.getTypeMovieImageViewlist(type);
-				initialClear();
-				frontSideControl(PicUrl);
-			}
-		});
-	}
-	
-	public void clickMusic() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				MainMovieData moviedata = new MainMovieData();
-				String type = "ÒôÀÖ";
-				ArrayList<String> PicUrl = moviedata.getTypeMovieImageViewlist(type);
-				initialClear();
-				frontSideControl(PicUrl);
-			}
-		});
-	}
-	
-	public void clickAdventure() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				MainMovieData moviedata = new MainMovieData();
-				String type = "Ã°ÏÕ";
-				ArrayList<String> PicUrl = moviedata.getTypeMovieImageViewlist(type);
-				initialClear();
-				frontSideControl(PicUrl);
-			}
-		});
-	}
-	
-	public void clickChild() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				MainMovieData moviedata = new MainMovieData();
-				String type = "¶ùÍ¯";
-				ArrayList<String> PicUrl = moviedata.getTypeMovieImageViewlist(type);
-				initialClear();
-				frontSideControl(PicUrl);
-			}
-		});
-	}
-
 	private void ShowPic(String picurl,int id) {
 		Image img = new Image(Sub1Control.class.getResourceAsStream("moviePicture\\"+picurl));
 		switch(id) {
