@@ -21,8 +21,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class Sub1Control  {
-	private MainMovieData moviedata;
-	@FXML private AnchorPane Sub1Pane;
+	@FXML private AnchorPane sub1Pane;
 	@FXML private AnchorPane subAnchorPane1;
 	@FXML private AnchorPane subAnchorPane2;
 	@FXML private ScrollPane scrollPane;
@@ -67,7 +66,7 @@ public class Sub1Control  {
 	private String language = "CHINESE";
 	boolean leftRun = false;
 	boolean rightRun = true;
-	
+	MovieManager movieManager = new MovieManager();
 	
 	
 	public void setFatherControler(PlayerControl playerControl
@@ -82,8 +81,8 @@ public class Sub1Control  {
 	@FXML 
 	public void initialize() {
 		subAnchorPane2.setVisible(false);
-		MovieManager movieManager = new MovieManager();
-		setMovieData(new MainMovieData());
+		ArrayList<String> picUrl = MainMovieData.getMovieImageViewList();
+		frontSideControl(picUrl);
 	}
 	
 	
@@ -92,7 +91,6 @@ public class Sub1Control  {
 		
 		movieName.setText(null);
 		movieInform.setText(null);
-		MovieManager movieManager = new MovieManager();
 		String[][] movieIfm = movieManager.getAllMovieInformation();
 		String []movieIfm2 = new String[6];
 		for(int i = 0;i<movieIfm.length;i++) {
@@ -110,15 +108,17 @@ public class Sub1Control  {
 			int k = name.substring(i).indexOf("-");
 			System.out.println("i "+i+" j "+j+" k "+k);
 			String showName = name.substring(i);
-			if(j>=0) showName = name.substring(i+1, j+i);
-			else showName = name.substring(i+1,k+i);
+			if(j>=0) {
+				showName = name.substring(i+1, j+i);
+			}else {
+				showName = name.substring(i+1,k+i);
+			}
 			movieName.setText(showName);
 			movieYear.setText(movieIfm2[5]);
 			
 			String searchName = name.substring(i+1);
 			searchName = name.substring(i+1,k+i);
-			WebCrawerTools crawer = new WebCrawerTools();
-			String introduction = crawer.paZhongWen(searchName);
+			String introduction = WebCrawerTools.paZhongWen(searchName);
 			System.out.println("SearchName  "+searchName);
 			movieInform.setText(introduction);
 			
@@ -134,17 +134,19 @@ public class Sub1Control  {
 			int k = name.substring(i).indexOf("-");
 			
 			String showName = name.substring(i);
-			if(j>=0) showName = name.substring(i+1, j+i);
-			else showName = name.substring(i+1,k+i);
+			if(j>=0) {
+				showName = name.substring(i+1, j+i);
+			}else {
+				showName = name.substring(i+1,k+i);
+			}
 			movieName.setText(showName.replaceAll("[^A-z ]", "")
 					  .replaceAll("[_]", " "));
 			movieYear.setText(movieIfm2[5]);
 			
 			String searchName = name.substring(i+1);
 			searchName = name.substring(i+1,k+i);
-			WebCrawerTools crawer = new WebCrawerTools();
 			System.out.println("SearchName  "+searchName);
-			String introduction = crawer.paYingWen(searchName);
+			String introduction = WebCrawerTools.paYingWen(searchName);
 			movieInform.setText(introduction);
 			
 			String reg = "[^A-z |]";
@@ -195,7 +197,9 @@ public class Sub1Control  {
 				nowPlay.setText(pps.getProperty("Á¢¼´²¥·Å"));
 				backToMenu.setText(pps.getProperty("·µ»Ø"));
 			}
-			if(nowMovieUrl!=null) showInformSet(nowMovieUrl);
+			if(nowMovieUrl!=null) {
+				showInformSet(nowMovieUrl);
+			}
 			
 		} catch (IOException e) {
 			System.out.println("Properties file missing");
@@ -205,103 +209,100 @@ public class Sub1Control  {
 
 	}
 	
-	private void rightAction(ArrayList<String> PicUrl) {
+	private void rightAction(ArrayList<String> picUrl) {
 		initialClear();
 		leftRun = true;
-		if(rightRun == true) showIndex++;
+		if(rightRun == true) {
+			showIndex++;
+		}
 		int si2 = showIndex;
 		try {
-			ShowPic(PicUrl.get(si2-2),1);
-			showList[0] = PicUrl.get(si2-2);
+			ShowPic(picUrl.get(si2-2),1);
+			showList[0] = picUrl.get(si2-2);
 		}catch(Exception e) {}
 		try {
-			ShowPic(PicUrl.get(si2-1),2);
-			showList[1] = PicUrl.get(si2-1);
+			ShowPic(picUrl.get(si2-1),2);
+			showList[1] = picUrl.get(si2-1);
 		}catch(Exception e) {}
 		try {
-			ShowPic(PicUrl.get(si2),3);
-			showList[2] = PicUrl.get(si2);
+			ShowPic(picUrl.get(si2),3);
+			showList[2] = picUrl.get(si2);
 		}catch(Exception e) {}
 		try {
-			ShowPic(PicUrl.get(si2+1),4);
-			showList[3] = PicUrl.get(si2+1);
+			ShowPic(picUrl.get(si2+1),4);
+			showList[3] = picUrl.get(si2+1);
 		}catch(Exception e) {
 			rightRun = false;
 	    }
 		try {
-			ShowPic(PicUrl.get(si2+2),5);
-			showList[4] = PicUrl.get(si2+2);
+			ShowPic(picUrl.get(si2+2),5);
+			showList[4] = picUrl.get(si2+2);
 		}catch(Exception e) {}
 		
 	}
 		
-	private void leftAction(ArrayList<String> PicUrl) {
+	private void leftAction(ArrayList<String> picUrl) {
 		initialClear();
 		rightRun = true;
 		System.out.println(showIndex);
-		if(leftRun == true) showIndex--;
+		if(leftRun == true) {
+			showIndex--;
+		}
 		int si2 = showIndex;
 		try {
-			ShowPic(PicUrl.get(si2-2),1);
-			showList[0] = PicUrl.get(si2-2);
+			ShowPic(picUrl.get(si2-2),1);
+			showList[0] = picUrl.get(si2-2);
 		}catch(Exception e) {}
 		try {
-			ShowPic(PicUrl.get(si2-1),2);
-			showList[1] = PicUrl.get(si2-1);
+			ShowPic(picUrl.get(si2-1),2);
+			showList[1] = picUrl.get(si2-1);
 		}catch(Exception e) {
 		    leftRun = false;
 		}
 		try {
-			ShowPic(PicUrl.get(si2),3);
-			showList[2] = PicUrl.get(si2);
+			ShowPic(picUrl.get(si2),3);
+			showList[2] = picUrl.get(si2);
 		}catch(Exception e) {}
 		try {
-			ShowPic(PicUrl.get(si2+1),4);
-			showList[3] = PicUrl.get(si2+1);
+			ShowPic(picUrl.get(si2+1),4);
+			showList[3] = picUrl.get(si2+1);
 		}catch(Exception e) {}
 		try {
-			ShowPic(PicUrl.get(si2+2),5);
-			showList[4] = PicUrl.get(si2+2);
+			ShowPic(picUrl.get(si2+2),5);
+			showList[4] = picUrl.get(si2+2);
 		}catch(Exception e) {}
 		
 		
 	}
 
-	private void frontSideControl(ArrayList<String> PicUrl) {
+	private void frontSideControl(ArrayList<String> picUrl) {
         
 		showIndex =  0;
 		int si = showIndex;
-		ShowPic(PicUrl.get(si),3);
-		showList[2] = PicUrl.get(si);
+		ShowPic(picUrl.get(si),3);
+		showList[2] = picUrl.get(si);
 		try {
-			ShowPic(PicUrl.get(si+1),4);
-			showList[3] = PicUrl.get(si+1);
+			ShowPic(picUrl.get(si+1),4);
+			showList[3] = picUrl.get(si+1);
 		}catch(Exception e) {}
 		try {
-			ShowPic(PicUrl.get(si+2),5);
-			showList[4] = PicUrl.get(si+2);
+			ShowPic(picUrl.get(si+2),5);
+			showList[4] = picUrl.get(si+2);
 		}catch(Exception e) {}
 			
 	
 		right.setOnAction(oa->{
-			rightAction(PicUrl);
+			rightAction(picUrl);
 	    });
 		left.setOnAction(oa->{
-			leftAction(PicUrl);
+			leftAction(picUrl);
 	    });
 	}
 
-	public void setMovieData(MainMovieData moviedata) {
-		this.moviedata = moviedata;
-		ArrayList<String> PicUrl = moviedata.getMovieImageViewList();
-		frontSideControl(PicUrl);
-	}
-	
 	private void selectTypeAction(String type) {
-		MainMovieData moviedata = new MainMovieData();
-		ArrayList<String> PicUrl = moviedata.getTypeMovieImageViewlist(type);
+		ArrayList<String> picUrl = MainMovieData.getTypeMovieImageViewlist(type);
 		initialClear();
-		frontSideControl(PicUrl);
+		frontSideControl(picUrl);
 	}
     
 	private void viewOperation(int id) {
@@ -309,6 +310,7 @@ public class Sub1Control  {
         subAnchorPane2.setVisible(true);
         Image image = null;
         switch(id) {
+        default :;
         case 1: image = imageView1.getImage();break;
         case 2: image = imageView2.getImage();break;
         case 3: image = imageView3.getImage();break;
@@ -323,6 +325,7 @@ public class Sub1Control  {
 	private void ShowPic(String picurl,int id) {
 		Image img = new Image(Sub1Control.class.getResourceAsStream("moviePicture\\"+picurl));
 		switch(id) {
+		default: ;
 		case 1:imageView1.setImage(img);break;
 		case 2:imageView2.setImage(img);break;
 		case 3:imageView3.setImage(img);break;
@@ -363,10 +366,9 @@ public class Sub1Control  {
 	
 	@FXML
 	public void clickall() {
-		MainMovieData moviedata = new MainMovieData();
-		ArrayList<String> PicUrl =  moviedata.getMovieImageViewList();
+		ArrayList<String> picUrl = MainMovieData.getMovieImageViewList();
 		initialClear();
-		frontSideControl(PicUrl);
+		frontSideControl(picUrl);
 	}
     
 	@FXML

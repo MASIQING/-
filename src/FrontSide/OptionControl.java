@@ -52,18 +52,22 @@ public class OptionControl {
 	
 	@FXML public void selectWhite() {
 		System.out.println("1");
-		if(language.equals("CHINESE"))
+		if(language.equals("CHINESE")) {
 			selectCSS.setText("浅色主题");
-		if(language.equals("ENGLISH"))
+		}
+		if(language.equals("ENGLISH")) {
 			selectCSS.setText("Bright");
+		}
 		cssName = "CSS White";
 	}
 	@FXML public void selectBlack() {
 		System.out.println("2");
-		if(language.equals("CHINESE"))
+		if(language.equals("CHINESE")) {
 			selectCSS.setText("暗夜黑");
-		if(language.equals("ENGLISH"))
+		}
+		if(language.equals("ENGLISH")) {
 			selectCSS.setText("Dark");
+		}
 		cssName = "CSS Black";
 	}
 	@FXML public void selectBlue() {

@@ -13,7 +13,7 @@ public class WebCrawerTools {
 	}
 	
 	
-	public String paZhongWen(String movieName){
+	public static String paZhongWen(String movieName){
 		
 		String URLString = "https://baike.baidu.com/item/"+movieName;
 		String content = "no introduction";
