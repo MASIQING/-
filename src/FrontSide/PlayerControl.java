@@ -1,6 +1,4 @@
 package FrontSide;
-
-
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.beans.value.ObservableValue;
@@ -15,9 +13,16 @@ import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+/**
+ * 控制播放器的播放行为<br>
+ * 包括播放器进度条和音量控制
+ * @version 2018/5/27
+ * 
+ * @author 马思清
+ *
+ * **/
 public class PlayerControl {
-	    
-	    //播放器界面 (FXML变量)
+	   
 		@FXML private Button playPause;
 		@FXML private Slider slider;
 		@FXML private Slider volumeSlider;
@@ -27,25 +32,31 @@ public class PlayerControl {
 		@FXML private AnchorPane settingPane;
 		@FXML private AnchorPane mediaPane;
 		@FXML private ImageView volumeImage;
-
-		private String mediaLocation;  //视频文件地址  
-	    private MediaPlayer mediaPlayer;//新建的MediaPlayer
-	    Timer timer = new Timer();
-	    
+		private String mediaLocation;
+	    private MediaPlayer mediaPlayer;
+	    private Timer timer = new Timer();
 	   
-		public String getMediaLocation() {
-			return mediaLocation;
-		}
+	    /**
+	     * 设置电影文件的URL
+	     * **/
 		public void setMediaURL(String mediaLocation) {
 			this.mediaLocation = mediaLocation;
 		}
 		
-		//关闭影片
+		/**
+		 * 停止播放,清空播放器内容并停止计时
+		 * **/
 		public void stop() {
-			if(mediaPlayer!=null) mediaPlayer.dispose();
+			if(mediaPlayer!=null){
+				mediaPlayer.dispose();
+				timer.cancel();
+			}
 		}
 		
-		//获取播放器状态
+		/**
+		 * 获取播放器状态<br>
+		 * @return 0播放器已清空,1正在播放,2暂停,-1其他情况
+		 * **/
 		public int getStatus() {
 			
 			if(mediaPlayer == null ||
@@ -60,26 +71,30 @@ public class PlayerControl {
 			}
 		
 		}
-		
-		
-		@FXML//初始化代码（加载特定的css文件）
+		/**
+		 * PlayerControl的初始化<br>
+		 * 清除所有的样式并应用最新的样式
+		 * **/
+		@FXML
 		public void initialize() {
 			playPause.getStylesheets().clear();
 			playPause.getStylesheets().addAll(getClass().getResource("css\\CSS Button Paused.css").toExternalForm());
 		}
 		
-		//开始播放视频
+		/**
+		 * 开始播放<br>
+		 * 自动加载最新的视频文件并开始监听进度条和音量控制
+		 * **/
 		public void mediaPlay() {
 		
 			try{	
-				//获取视频URL 并创建媒体对象
-				String mediaURL = getClass().getResource(mediaLocation).toString(); //需要把多媒体文件放置到out目录上的运行class目录树下
+				/**加载影片到视频播放器对象**/
+				String mediaURL = getClass().getResource(mediaLocation).toString(); 
 				Media media = new Media(mediaURL);		
-				//创建播放器对象
+				
 				mediaPlayer = new MediaPlayer(media);
 				mediaPlayer.setAutoPlay(true);
 				
-				//创建媒体播放视图，并开始播放
 				mediaView.setMediaPlayer(mediaPlayer);
 				mediaPlayer.play();
 				volumeSlider.setValue(30);
@@ -91,7 +106,7 @@ public class PlayerControl {
 			}		
 			    
 			
-			//进度条运动的定时器设置 
+			/**开始计时**/
 			    timer = new Timer();
 	    		timer.schedule(new TimerTask() {
 	    			public void run() {
@@ -102,7 +117,7 @@ public class PlayerControl {
 	    		}, 0, 100);
                 
 			
-			//进度条的监听
+			/**视频播放进度条监听**/
 			    slider.valueProperty().addListener((
 		            ObservableValue<? extends Number> ov, 
 		            Number old_val, Number new_val) -> {
@@ -117,17 +132,21 @@ public class PlayerControl {
 		            }
 		        });
 		 
-			//音量控制监听
+			/**音量控制滑动条监听**/
 			    volumeSlider.valueProperty().addListener((
-			            ObservableValue<? extends Number> ov, 
-			            Number old_val, Number new_val) -> {
-			            	 mediaPlayer.setVolume(new_val.doubleValue()/50);
-			            });
+			        ObservableValue<? extends Number> ov, 
+			        Number old_val, Number new_val) -> {
+			            /**音量衰减值**/
+			            int damp = 50;
+			            mediaPlayer.setVolume(new_val.doubleValue()/damp);
+			     });
 	            
 			    
 		}
 	    
-		//暂停与继续播放视频
+		/**
+		 * 暂停与播放按钮的监听
+		 * **/
 		@FXML
 		public void pauseAndPlay() {
 
@@ -150,14 +169,14 @@ public class PlayerControl {
 			}
 		}
 		
-		//进度条跟随
-		public void slideControl() {
-			
+		/**
+		 * 视频进度滑动条的控制
+		 * **/
+		private void slideControl() {
 			double endTime = mediaPlayer.getStopTime().toMillis();
 			double nowTime = mediaPlayer.getCurrentTime().toMillis();
 			double percentValue = (nowTime/endTime) * 100 ;
 			
-			//显示当前播放时间和视频总时长。
 			if(slider.isPressed() == false) {
 				try {
 					slider.setValue(percentValue);
@@ -168,16 +187,22 @@ public class PlayerControl {
 					e.printStackTrace();
 				}	
 			}
-	     }
+	    }
 		
-		//时间格式转换
+		/**
+		 * 时间格式转换
+		 * **/
 		private String changeTime(double time) {
 			String changed = "";
 		    int newTime = (int) (time/1000);
 		    String minutes = String.valueOf(newTime/60);
 		    String seconds = String.valueOf(newTime - (newTime/60)*60 );
-		    if(minutes.length() == 1)minutes = "0"+minutes;
-		    if(seconds.length() == 1)seconds = "0"+seconds;
+		    if(minutes.length() == 1){
+		    	minutes = "0"+minutes;
+		    }
+		    if(seconds.length() == 1){
+		    	seconds = "0"+seconds;
+		    }
 		    changed = minutes+ ":" +seconds;
 			return changed;
 		}

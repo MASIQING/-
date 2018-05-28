@@ -1,15 +1,19 @@
 package FrontSide;
 
-
-import java.util.HashMap;
-
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 
+/**
+ * 设置界面控制器<br>
+ * 改变样式表和语言，进入隐藏模式
+ * @version 2018/5/27
+ * 
+ * @author 马思清
+ *
+ * **/
 public class OptionControl {
 	@FXML private SplitMenuButton selectCSS;
 	@FXML private SplitMenuButton selectLanguage;
@@ -27,14 +31,13 @@ public class OptionControl {
 	private Parent sbRoot;
 	private Parent pcRoot;
 	private Parent mcRoot;
-	
 	private Sub1Control sbControl;
 	private String language = "CHINESE";
 	private String cssName = "DEFAULT";
 	
-	
-	
-	
+	/**
+	 * 初始化，传入四个界面文档的parent
+	 * **/
 	public void setRoot(Parent opRoot,
     					     Parent sbRoot,
     					     Parent pcRoot,
@@ -44,7 +47,9 @@ public class OptionControl {
     	this.pcRoot = pcRoot;
     	this.sbRoot = sbRoot;
     }
-	
+	/**
+	 * 初始化，传入电影选择界面的控制器
+	 * **/
 	public void setControler(Sub1Control sbControl) {
 		this.sbControl = sbControl;
 	}
@@ -95,7 +100,7 @@ public class OptionControl {
 		
 	}
 	
-	public void changeLanguage() {
+	private void changeLanguage() {
 		selectLanguage.setText("语言 Language");
 		if(language.equals("ENGLISH")) {
 			sbControl.changeLanguage("ENGLISH");
@@ -114,7 +119,7 @@ public class OptionControl {
 		}
 	}
 	
-	public void changeCSS() {
+	private void changeCSS() {
 		 if(!cssName.equals("DEFAULT")) {
 		    opRoot.getStylesheets().clear();
 		    pcRoot.getStylesheets().clear();

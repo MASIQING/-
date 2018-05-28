@@ -25,7 +25,6 @@ public class StartPaneControl {
 				mcRoot.getStylesheets().addAll(getClass().getResource("css\\CSS White.css").toExternalForm());
 				mcControl.setParent(mcRoot);
 				
-			
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

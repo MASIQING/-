@@ -39,9 +39,7 @@ public class SceneStart extends Application{
 		primaryStage.setResizable(false);
 		//ÏÔÊ¾´°¿Ú
 		primaryStage.show();
-		
-		
-		
+	
 	}
 	
 }

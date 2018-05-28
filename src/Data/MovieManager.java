@@ -14,7 +14,7 @@ import java.util.Scanner;
  * @author 李晶晶
  *
  */
-public class MovieManager implements MovieInformation {
+public class MovieManager {
 	static Scanner scanner = new Scanner(System.in);
 
 	/**
@@ -63,7 +63,7 @@ public class MovieManager implements MovieInformation {
 			File file = new File(fileUrl);
 			in = new BufferedReader(new FileReader(file));
 			String[] info = new String[8];
-			Database_operation dbop = new Database_operation();
+			DatabaseOperation dbop = new DatabaseOperation();
 			while ((line = in.readLine()) != null) {
 				info = line.split(",");
 				id = IntegerConvert(info[0]);
@@ -101,7 +101,7 @@ public class MovieManager implements MovieInformation {
 	public static void deleteMovie() {
 		System.out.println("请输入您要删除的电影编号:");
 		int id = scanner.nextInt();
-		Database_operation dbop = new Database_operation();
+		DatabaseOperation dbop = new DatabaseOperation();
 		dbop.query("delete from type_film where filmid = '" + id + "'");
 		dbop.query("delete from films where movieid = '" + id + "'");
 	}
@@ -113,7 +113,7 @@ public class MovieManager implements MovieInformation {
 	 * </p>
 	 */
 	public static void showMoList() {
-		Database_operation dbop = new Database_operation();
+		DatabaseOperation dbop = new DatabaseOperation();
 		dbop.printTable();
 	}
 
@@ -124,7 +124,7 @@ public class MovieManager implements MovieInformation {
 	 * </p>
 	 */
 	public static void showTypeMoList() {
-		Database_operation dbop = new Database_operation();
+		DatabaseOperation dbop = new DatabaseOperation();
 		System.out.println("请输入电影类型");
 		String type = scanner.next();
 		dbop.showtype(
@@ -217,10 +217,8 @@ public class MovieManager implements MovieInformation {
 	 * 返回电影信息二维表的方法
 	 * </p>
 	 */
-	@Override
 	public String[][] getAllMovieInformation() {
-		// TODO Auto-generated method stub
-		Database_operation dbop = new Database_operation();
+		DatabaseOperation dbop = new DatabaseOperation();
 		String[][] movieinfo = dbop.dataToArray();
 		return movieinfo;
 	}
@@ -231,32 +229,9 @@ public class MovieManager implements MovieInformation {
 	 * </p>
 	 */
 	public String[][] getTypeMovieInformation(String type){
-		Database_operation dbop = new Database_operation();
+		DatabaseOperation dbop = new DatabaseOperation();
 		String[][] movieinfo = dbop.TypedataToArray(type);
 		return movieinfo;
 	}
-	@Override
-	public void addNewFilm(String[] newFilmInformation) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deleteFilm(int type, String inform) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public HashMap searchMovie(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List getAllMovieName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }

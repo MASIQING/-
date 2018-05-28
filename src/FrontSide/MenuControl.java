@@ -1,25 +1,24 @@
 package FrontSide;
 
-import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.media.*;
 
+/**
+ * 控制左侧的菜单选择栏
+ * 
+ * @version 2018/5/27
+ * 
+ * @author 马思清
+ * 
+ * **/
 public class MenuControl {
     
-
-	//以下为JavaFx中元素的fxid
 	
-	//主界面 (FXML变量)
     @FXML private AnchorPane mainPane;
 	@FXML private AnchorPane centrePane;
 	@FXML private AnchorPane leftPane;
@@ -37,8 +36,6 @@ public class MenuControl {
 	
 	@FXML
 	public void initialize() {
-		System.out.println("Initial");
-		 
 			try {
 				Parent allMovie_SUB = FXMLLoader.load(getClass().getResource("Sub1.fxml"));
 				centrePane.getChildren().clear();

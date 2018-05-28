@@ -20,6 +20,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
+/**
+ * 控制影片选择界面
+ * @version 2018/5/27
+ * 
+ * @author 马思清
+ *
+ * **/
 public class Sub1Control  {
 	@FXML private AnchorPane sub1Pane;
 	@FXML private AnchorPane subAnchorPane1;

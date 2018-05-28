@@ -8,14 +8,14 @@ import java.sql.*;
  * @author 李晶晶
  *
  */
-public class Database_operation {
-	static final String JDBC_DRIVER = "org.postgresql.Driver";// The driver is
+public class DatabaseOperation {
+	private static final String JDBC_DRIVER = "org.postgresql.Driver";// The driver is
 																// for mysql
-	static final String DB_URL = "jdbc:postgresql://10.20.23.25/cs307?useUnicode=true&characterEncoding=utf-8&useSSL=false";// my
-																															// database
-																															// url
-	static final String USER = "u11612023";// my username
-	static final String PASS = "11612023";// my password
+	private static final String DB_URL = "jdbc:postgresql://10.20.23.25/cs307?useUnicode"
+			                    + "=true&characterEncoding=utf-8&useSSL=false";//My data base sql
+																															
+	private static final String USER = "u11612023";// my username
+	private static final String PASS = "11612023";// my password
 
 	/**
 	 * 打印film表
@@ -61,14 +61,16 @@ public class Database_operation {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (stmt != null)
+				if (stmt != null) {
 					stmt.close();
+				}
 			} catch (SQLException se1) {
 
 			}
 			try {
-				if (conn != null)
+				if (conn != null) {
 					stmt.close();
+				}
 			} catch (SQLException se) {
 				se.printStackTrace();
 			}
@@ -102,14 +104,16 @@ public class Database_operation {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (stmt != null)
+				if (stmt != null) {
 					stmt.close();
+				}
 			} catch (SQLException se1) {
 
 			}
 			try {
-				if (conn != null)
+				if (conn != null) {
 					stmt.close();
+				}
 			} catch (SQLException se) {
 				se.printStackTrace();
 			}
@@ -159,14 +163,16 @@ public class Database_operation {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (stmt != null)
+				if (stmt != null) {
 					stmt.close();
+				}
 			} catch (SQLException se1) {
 
 			}
 			try {
-				if (conn != null)
+				if (conn != null) {
 					stmt.close();
+				}
 			} catch (SQLException se) {
 				se.printStackTrace();
 			}
@@ -204,14 +210,16 @@ public class Database_operation {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (stmt != null)
+				if (stmt != null) {
 					stmt.close();
+				}
 			} catch (SQLException se1) {
 
 			}
 			try {
-				if (conn != null)
+				if (conn != null) {
 					stmt.close();
+				}
 			} catch (SQLException se) {
 				se.printStackTrace();
 			}
@@ -249,14 +257,16 @@ public class Database_operation {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (stmt != null)
+				if (stmt != null) {
 					stmt.close();
+				}
 			} catch (SQLException se1) {
 
 			}
 			try {
-				if (conn != null)
+				if (conn != null) {
 					stmt.close();
+				}
 			} catch (SQLException se) {
 				se.printStackTrace();
 			}
@@ -295,14 +305,16 @@ public class Database_operation {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (stmt != null)
+				if (stmt != null) {
 					stmt.close();
+				}
 			} catch (SQLException se1) {
 
 			}
 			try {
-				if (conn != null)
+				if (conn != null) {
 					stmt.close();
+				}
 			} catch (SQLException se) {
 				se.printStackTrace();
 			}
@@ -367,14 +379,16 @@ public class Database_operation {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (stmt != null)
+				if (stmt != null) {
 					stmt.close();
+				}
 			} catch (SQLException se1) {
 
 			}
 			try {
-				if (conn != null)
+				if (conn != null) {
 					stmt.close();
+				}
 			} catch (SQLException se) {
 				se.printStackTrace();
 			}
@@ -441,14 +455,16 @@ public class Database_operation {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (stmt != null)
+				if (stmt != null) {
 					stmt.close();
+				}
 			} catch (SQLException se1) {
 
 			}
 			try {
-				if (conn != null)
+				if (conn != null) {
 					stmt.close();
+				}
 			} catch (SQLException se) {
 				se.printStackTrace();
 			}
