@@ -10,6 +10,9 @@ public class MainMovieData {
 	static String[][] movieList = getMovieInformation();// 获取电影信息的二维数组
 	private ArrayList<String> movieData = new ArrayList<String>();
 
+	public MainMovieData() {
+		movieData.addAll(getMovieListViewlist());
+	}
 
 	public static String[][] getMovieInformation() {
 		MovieManager mov = new MovieManager();
@@ -69,8 +72,18 @@ public class MainMovieData {
 		return list;
 	}
 
-	public MainMovieData() {
-		movieData.addAll(getMovieListViewlist());
+	public static String[] findMovieData(String picUrl) {
+		
+		String[][]movieIfm = MovieManager.getAllMovieInformation();
+		String[] movieIfm2 = new String [6];
+		for(int i = 0;i<movieIfm.length;i++) {
+			
+			if(movieIfm[i][2].equals(picUrl)) {
+				movieIfm2 = movieIfm[i];
+				return movieIfm2;
+			}
+		}
+		return null;
 	}
 
 	public ArrayList<String> getMovieData() {

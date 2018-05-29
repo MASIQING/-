@@ -1,11 +1,15 @@
 package FrontSide;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -29,6 +33,7 @@ public class PlayerControl {
 		@FXML private MediaView mediaView;
 		@FXML private Text showTime;
 		@FXML private Button back;
+		@FXML private AnchorPane fatherPane;
 		@FXML private AnchorPane settingPane;
 		@FXML private AnchorPane mediaPane;
 		@FXML private ImageView volumeImage;
@@ -140,7 +145,28 @@ public class PlayerControl {
 			            int damp = 50;
 			            mediaPlayer.setVolume(new_val.doubleValue()/damp);
 			     });
-	            
+	        
+		    /**¼üÅÌ´¦Àí¼àÌý**/
+		        fatherPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
+					@Override
+					public void handle(KeyEvent event) {
+						System.out.println(event.getCode());
+						if(event.getCode() == KeyCode.SHIFT) {
+		                    pauseAndPlay();
+		                }	
+						if(event.getCode() == KeyCode.UP) {
+		                    pauseAndPlay();
+		                }	
+						if(event.getCode() == KeyCode.DOWN) {
+		                   
+		                }	
+						if(event.getCode() == KeyCode.LEFT) {
+		                   
+		                }	
+						if(event.getCode() == KeyCode.RIGHT) {
+		                    
+		                }	
+				}});
 			    
 		}
 	    

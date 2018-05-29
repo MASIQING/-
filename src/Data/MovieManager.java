@@ -15,7 +15,7 @@ import java.util.Scanner;
  *
  */
 public class MovieManager {
-	static Scanner scanner = new Scanner(System.in);
+	private static Scanner scanner = new Scanner(System.in);
 
 	/**
 	 * 字符串转化整数
@@ -217,7 +217,7 @@ public class MovieManager {
 	 * 返回电影信息二维表的方法
 	 * </p>
 	 */
-	public String[][] getAllMovieInformation() {
+	public static String[][] getAllMovieInformation() {
 		DatabaseOperation dbop = new DatabaseOperation();
 		String[][] movieinfo = dbop.dataToArray();
 		return movieinfo;
@@ -228,7 +228,7 @@ public class MovieManager {
 	 * 返回电影信息二维表的方法
 	 * </p>
 	 */
-	public String[][] getTypeMovieInformation(String type){
+	public static String[][] getTypeMovieInformation(String type){
 		DatabaseOperation dbop = new DatabaseOperation();
 		String[][] movieinfo = dbop.TypedataToArray(type);
 		return movieinfo;

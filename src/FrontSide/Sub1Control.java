@@ -73,7 +73,6 @@ public class Sub1Control  {
 	private String language = "CHINESE";
 	boolean leftRun = false;
 	boolean rightRun = true;
-	MovieManager movieManager = new MovieManager();
 	
 	
 	public void setFatherControler(PlayerControl playerControl
@@ -98,17 +97,10 @@ public class Sub1Control  {
 		
 		movieName.setText(null);
 		movieInform.setText(null);
-		String[][] movieIfm = movieManager.getAllMovieInformation();
-		String []movieIfm2 = new String[6];
-		for(int i = 0;i<movieIfm.length;i++) {
-			System.out.println(movieIfm[i][2]);
-			if(movieIfm[i][2].equals(nowMovieUrl)) {
-				movieIfm2 = movieIfm[i];
-				break;
-			}
-		}
 		
-		String name = movieIfm2[1];
+		String[] movieIfm = MainMovieData.findMovieData(nowMovieUrl);
+		String name = movieIfm[1];
+		
 		if(language.equals("CHINESE")) {
 			int i = name.indexOf("&");
 			int j = name.substring(i).indexOf("/");
@@ -121,7 +113,7 @@ public class Sub1Control  {
 				showName = name.substring(i+1,k+i);
 			}
 			movieName.setText(showName);
-			movieYear.setText(movieIfm2[5]);
+			movieYear.setText(movieIfm[5]);
 			
 			String searchName = name.substring(i+1);
 			searchName = name.substring(i+1,k+i);
@@ -131,7 +123,7 @@ public class Sub1Control  {
 			
 			String reg = "[^\\u4e00-\\u9fa5 |]";
 			String reg2 = "[|]";
-			String countryName = movieIfm2[4].replaceAll(reg, "").replaceAll(reg2, " ");
+			String countryName = movieIfm[4].replaceAll(reg, "").replaceAll(reg2, " ");
 			movieCountry.setText(countryName);
 			
 			
@@ -148,7 +140,7 @@ public class Sub1Control  {
 			}
 			movieName.setText(showName.replaceAll("[^A-z ]", "")
 					  .replaceAll("[_]", " "));
-			movieYear.setText(movieIfm2[5]);
+			movieYear.setText(movieIfm[5]);
 			
 			String searchName = name.substring(i+1);
 			searchName = name.substring(i+1,k+i);
@@ -158,7 +150,7 @@ public class Sub1Control  {
 			
 			String reg = "[^A-z |]";
 			String reg2 = "[|]";
-			String countryName = movieIfm2[4].replaceAll(reg, "").replaceAll(reg2, " ");
+			String countryName = movieIfm[4].replaceAll(reg, "").replaceAll(reg2, " ");
 			movieCountry.setText(countryName);
 			
 			
@@ -251,7 +243,6 @@ public class Sub1Control  {
 	private void leftAction(ArrayList<String> picUrl) {
 		initialClear();
 		rightRun = true;
-		System.out.println(showIndex);
 		if(leftRun == true) {
 			showIndex--;
 		}
@@ -283,7 +274,7 @@ public class Sub1Control  {
 	}
 
 	private void frontSideControl(ArrayList<String> picUrl) {
-        
+		showList = new String[5];
 		showIndex =  0;
 		int si = showIndex;
 		ShowPic(picUrl.get(si),3);
@@ -325,8 +316,9 @@ public class Sub1Control  {
         case 5: image = imageView5.getImage();break;
         }
         movieInformImage.setImage(image);
-        nowMovieUrl = showList[id-1]; 
+        nowMovieUrl = showList[id-1].trim(); 
         showInformSet(nowMovieUrl);
+    
 	}
 	
 	private void ShowPic(String picurl,int id) {
@@ -354,19 +346,10 @@ public class Sub1Control  {
 		subAnchorPane2.setVisible(false);
 		subAnchorPane1.setVisible(true);
 	
-		MovieManager movieManager = new MovieManager();
-		String[][] movieIfm = movieManager.getAllMovieInformation();
-		String []movieIfm2 = new String[6];
-		
-		for(int i = 0;i<movieIfm.length;i++) {
-			if(movieIfm[i][2].equals(nowMovieUrl)) {
-				movieIfm2 = movieIfm[i];
-				break;
-			}
-		}
+		String[] movieIfm = MainMovieData.findMovieData(nowMovieUrl);
 		
 		playerControl.stop();
-		playerControl.setMediaURL("movie\\"+movieIfm2[3]);
+		playerControl.setMediaURL("movie\\"+movieIfm[3]);
 		playerControl.mediaPlay();
 		this.centrePane.getChildren().addAll(root);
 	}
