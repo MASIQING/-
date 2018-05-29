@@ -1,13 +1,13 @@
 
 /*左侧选择栏的按钮定义*/
-#But_AllMovie{/*全部影片按钮*/
+#allMovie{/*全部影片按钮*/
 	-fx-background-color: #FFFFFF;
 	-fx-background-image:url(/FrontSide/frontSidePicture/menu.png);
 	-fx-border-color: #ADADAD;
 	-fx-border-radius: 2;
     -fx-border-width: 2;
 }
-#But_AllMovie:hover{
+#allMovie:hover{
 	-fx-background-color: #FFFFFF;
 	-fx-background-image:url(/FrontSide/frontSidePicture/menu.png);
 	-fx-border-color: #4F4F4F;
@@ -16,14 +16,14 @@
 }
 
 
-#But_nowPlaying{/*播放器按钮*/
+#nowPlaying{/*播放器按钮*/
 	-fx-background-color: #FFFFFF;
 	-fx-background-image:url(/FrontSide/frontSidePicture/play.png);
 	-fx-border-color: #ADADAD;
 	-fx-border-radius: 2;
     -fx-border-width: 2;
 }
-#But_nowPlaying:hover{
+#nowPlaying:hover{
 	-fx-background-color: #FFFFFF;
 	-fx-background-image:url(/FrontSide/frontSidePicture/play.png);
 	-fx-border-color: #4F4F4F;
@@ -32,14 +32,14 @@
 }
 
 
-#But_settings{/*设置按钮*/
+#settings{/*设置按钮*/
 	-fx-background-color: #FFFFFF;
 	-fx-background-image:url(/FrontSide/frontSidePicture/setting.png);
 	-fx-border-color: #ADADAD;
 	-fx-border-radius: 2;
     -fx-border-width: 2;
 }
-#But_settings:hover{
+#settings:hover{
 	-fx-background-color: #FFFFFF;
 	-fx-background-image:url(/FrontSide/frontSidePicture/setting.png);
 	-fx-border-color: #4F4F4F;

@@ -11,11 +11,14 @@ import java.util.Set;
 import Data.MainMovieData;
 import Data.MovieManager;
 import Data.WebCrawerTools;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -89,6 +92,46 @@ public class Sub1Control  {
 		subAnchorPane2.setVisible(false);
 		ArrayList<String> picUrl = MainMovieData.getMovieImageViewList();
 		frontSideControl(picUrl);
+		
+
+		//左右切换电影
+		sub1Pane.addEventHandler(KeyEvent.KEY_PRESSED, (key) ->{
+			System.out.println(key.getCode());
+			if(key.getCode() == KeyCode.RIGHT){
+				rightAction(picUrl);
+				key.consume();
+			}
+			if(key.getCode() == KeyCode.LEFT){
+				leftAction(picUrl);
+				key.consume();
+			}
+			//进入电影信息界面
+			if(key.getCode() == KeyCode.ENTER){
+				clickView3();
+				key.consume();
+			}
+			//蜜汁GRIDPANE循环
+			if(key.getCode() == KeyCode.UP){
+				System.out.println("ok");
+				//clickView3();
+				key.consume();
+			}
+			
+		});
+		//电影信息界面
+		subAnchorPane2.addEventHandler(KeyEvent.KEY_PRESSED, (key) ->{
+			//返回
+			if(key.getCode() == KeyCode.BACK_SPACE){
+				clickBackToMenu();
+				key.consume();
+			}
+			//播放
+			if(key.getCode() == KeyCode.ENTER){
+				clickNowPlay();
+				key.consume();
+			}
+		});
+		
 	}
 	
 	

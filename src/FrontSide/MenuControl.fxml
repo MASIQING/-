@@ -17,9 +17,9 @@
          <left>
             <AnchorPane fx:id="leftPane" prefHeight="555.0" prefWidth="80.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="But_settings" layoutX="11.0" layoutY="371.0" mnemonicParsing="false" onAction="#clickedSettings" opacity="0.6" prefHeight="170.0" prefWidth="55.0" />
-                  <Button fx:id="But_AllMovie" layoutX="11.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickedAllMovie" opacity="0.6" prefHeight="170.0" prefWidth="55.0" />
-                  <Button fx:id="But_nowPlaying" layoutX="11.0" layoutY="193.0" mnemonicParsing="false" onAction="#mediaPlay" opacity="0.6" prefHeight="170.0" prefWidth="55.0" />
+                  <Button fx:id="settings" layoutX="11.0" layoutY="371.0" mnemonicParsing="false" onAction="#clickedSettings" opacity="0.6" prefHeight="170.0" prefWidth="55.0" />
+                  <Button fx:id="allMovie" layoutX="11.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickedAllMovie" opacity="0.6" prefHeight="170.0" prefWidth="55.0" />
+                  <Button fx:id="nowPlaying" layoutX="11.0" layoutY="193.0" mnemonicParsing="false" onAction="#mediaPlay" opacity="0.6" prefHeight="170.0" prefWidth="55.0" />
                   <Line endY="549.0" layoutX="80.0" layoutY="5.0" opacity="0.83" startY="-2.0" strokeWidth="5.0">
                      <stroke>
                         <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0" startY="1.0">

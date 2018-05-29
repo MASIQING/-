@@ -1,5 +1,6 @@
 package FrontSide;
 
+import java.awt.event.KeyListener;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.beans.value.ObservableValue;
@@ -40,6 +41,7 @@ public class PlayerControl {
 		private String mediaLocation;
 	    private MediaPlayer mediaPlayer;
 	    private Timer timer = new Timer();
+	    private double volume;
 	   
 	    /**
 	     * 设置电影文件的URL
@@ -84,7 +86,76 @@ public class PlayerControl {
 		public void initialize() {
 			playPause.getStylesheets().clear();
 			playPause.getStylesheets().addAll(getClass().getResource("css\\CSS Button Paused.css").toExternalForm());
+			slider.requestFocus();
+			
+			slider.addEventFilter(KeyEvent.KEY_PRESSED, (key) ->{
+				
+				if(key.getCode() == KeyCode.ADD){
+    				double oldVolume = mediaPlayer.getVolume();
+    				mediaPlayer.setVolume(oldVolume+0.02);
+    				double newVolume = mediaPlayer.getVolume();
+    				volumeSlider.setValue(newVolume*100);
+    				key.consume();
+				}
+				
+				if(key.getCode() == KeyCode.SUBTRACT){
+    				double oldVolume = mediaPlayer.getVolume();
+    				mediaPlayer.setVolume(oldVolume-0.02);
+    				double newVolume = mediaPlayer.getVolume();
+    				volumeSlider.setValue(newVolume*100);
+    				key.consume();
+				}
+				
+				if(key.getCode() == KeyCode.LEFT){
+					double endTime = mediaPlayer.getStopTime().toMillis();
+					double nowTime = mediaPlayer.getCurrentTime().toMillis();
+					double percentValue = (nowTime/endTime);
+					double newPercentTime = percentValue-0.01;
+					double newTime = newPercentTime*endTime;
+					mediaPlayer.stop();
+					mediaPlayer.setStartTime(Duration.millis(newTime));
+					mediaPlayer.play();
+					slider.setValue(newPercentTime*100);
+					key.consume();
+				}
+				
+				if(key.getCode() == KeyCode.RIGHT){
+					double endTime = mediaPlayer.getStopTime().toMillis();
+					double nowTime = mediaPlayer.getCurrentTime().toMillis();
+					double percentValue = (nowTime/endTime);
+					double newPercentTime = percentValue+0.01;
+					double newTime = newPercentTime*endTime;
+					mediaPlayer.stop();
+					mediaPlayer.setStartTime(Duration.millis(newTime));
+					mediaPlayer.play();
+					slider.setValue(newPercentTime*100);
+					key.consume();
+				}
+				
+				if(key.getCode() == KeyCode.ENTER){
+					pauseAndPlay();
+					key.consume();
+				}
+				
+				if(key.getCode() == KeyCode.MULTIPLY){
+					//写入返回选择菜单方法
+					key.consume();
+				}
+				
+				if(key.getCode() == KeyCode.UP){
+					key.consume();
+				}
+				
+				if(key.getCode() == KeyCode.DOWN){
+					key.consume();
+				}
+			});
+			
 		}
+		
+		
+		
+
 		
 		/**
 		 * 开始播放<br>
@@ -99,10 +170,10 @@ public class PlayerControl {
 				
 				mediaPlayer = new MediaPlayer(media);
 				mediaPlayer.setAutoPlay(true);
-				
+				mediaPlayer.setVolume(0.5);
 				mediaView.setMediaPlayer(mediaPlayer);
 				mediaPlayer.play();
-				volumeSlider.setValue(30);
+				volumeSlider.setValue(50);
 				
 			}catch(Exception e) {
 				System.out.println("Error in loading movie url");
@@ -142,32 +213,14 @@ public class PlayerControl {
 			        ObservableValue<? extends Number> ov, 
 			        Number old_val, Number new_val) -> {
 			            /**音量衰减值**/
-			            int damp = 50;
+			            int damp = 100;
 			            mediaPlayer.setVolume(new_val.doubleValue()/damp);
+			            volume = mediaPlayer.getVolume();
 			     });
-	        
-		    /**键盘处理监听**/
-		        fatherPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
-					@Override
-					public void handle(KeyEvent event) {
-						System.out.println(event.getCode());
-						if(event.getCode() == KeyCode.SHIFT) {
-		                    pauseAndPlay();
-		                }	
-						if(event.getCode() == KeyCode.UP) {
-		                    pauseAndPlay();
-		                }	
-						if(event.getCode() == KeyCode.DOWN) {
-		                   
-		                }	
-						if(event.getCode() == KeyCode.LEFT) {
-		                   
-		                }	
-						if(event.getCode() == KeyCode.RIGHT) {
-		                    
-		                }	
-				}});
+			 
+			
 			    
+		      
 		}
 	    
 		/**
@@ -232,5 +285,7 @@ public class PlayerControl {
 		    changed = minutes+ ":" +seconds;
 			return changed;
 		}
+
+		
 		
 }

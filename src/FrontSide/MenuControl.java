@@ -22,9 +22,9 @@ public class MenuControl {
     @FXML private AnchorPane mainPane;
 	@FXML private AnchorPane centrePane;
 	@FXML private AnchorPane leftPane;
-	@FXML private Button But_AllMovie;
-	@FXML private Button But_settings;
-	
+	@FXML private Button allMovie;
+	@FXML private Button settings;
+	@FXML private Button nowPlaying;
 	private PlayerControl playerControl;
 	private Sub1Control sub1Control;
 	private OptionControl opControl;
@@ -45,7 +45,6 @@ public class MenuControl {
 				e1.printStackTrace();
 			}
 
-			
 		 
 		//º”‘ÿ ”∆µ≤•∑≈∆˜
 	        try {
