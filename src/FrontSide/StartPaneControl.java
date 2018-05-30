@@ -14,6 +14,9 @@ public class StartPaneControl {
 	
 	@FXML 
 	public void initialize() {
+		
+		System.out.println("STARTPANE initialize");
+		
 		 try {
 	        	FXMLLoader fxmlLoader = new FXMLLoader();
 	 	        fxmlLoader.setLocation(getClass().getResource("MenuControl.fxml"));//µÃµ½FXMLÎÄµµ
@@ -24,7 +27,8 @@ public class StartPaneControl {
 				anchorPane.getChildren().addAll(mcRoot);
 				mcRoot.getStylesheets().addAll(getClass().getResource("css\\CSS White.css").toExternalForm());
 				mcControl.setParent(mcRoot);
-				
+				mcControl.setMenuControl(mcControl);
+				mcControl.diliverControler();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

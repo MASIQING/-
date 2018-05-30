@@ -9,7 +9,6 @@ import java.util.Properties;
 import java.util.Set;
 
 import Data.MainMovieData;
-import Data.MovieManager;
 import Data.WebCrawerTools;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -42,22 +42,24 @@ public class Sub1Control  {
 	@FXML private ImageView imageView3;
 	@FXML private ImageView imageView4;
 	@FXML private ImageView imageView5;
-	@FXML private Button allmovie;
-	@FXML private Button love;
-	@FXML private Button sciencefiction;
-	@FXML private Button comedy;
-	@FXML private Button tragdy;
-	@FXML private Button action;
-	@FXML private Button horrible;
-	@FXML private Button suspense;
-	@FXML private Button history;
-	@FXML private Button music;
-	@FXML private Button adventure;
-	@FXML private Button child;
-	@FXML private Button chinese;
-	@FXML private Button europeAndUS;
-	@FXML private Button japanAndKorea;
-	@FXML private Button other;
+	
+	@FXML private Button g00; //全部
+	@FXML private Button g03; //爱情
+	@FXML private Button g13; //科幻
+	@FXML private Button g01; //喜剧
+	@FXML private Button g02; //悲剧
+	@FXML private Button g04; //动作
+	@FXML private Button g05; //恐怖
+	@FXML private Button g06; //悬疑
+	@FXML private Button g07; //历史
+	@FXML private Button g11; //音乐
+	@FXML private Button g12; //冒险
+	@FXML private Button g10; //儿童
+	@FXML private Button g14; //中国
+	@FXML private Button g15; //欧美
+	@FXML private Button g16; //日韩
+	@FXML private Button g17; //其他
+	
 	@FXML private Button right;
 	@FXML private Button left;
 	@FXML private Button nowPlay;
@@ -67,6 +69,8 @@ public class Sub1Control  {
 	@FXML private Text movieYear;
 	@FXML private Text movieInform;
 	
+	private int y = 0;
+	private int x = 0;
 	private int showIndex = 0;
 	private PlayerControl playerControl;
 	private AnchorPane centrePane;
@@ -76,8 +80,8 @@ public class Sub1Control  {
 	private String language = "CHINESE";
 	boolean leftRun = false;
 	boolean rightRun = true;
-	
-	
+	private String[][] Types = {{"全部", "喜剧", "悲剧", "爱情", "动作", "恐怖", "悬疑", "历史"},
+		       {"儿童", "音乐", "冒险", "科幻", "中国", "欧美", "日韩", "其他"}};	
 	public void setFatherControler(PlayerControl playerControl
 			                      ,AnchorPane centrePane
 			                      ,Parent root) {
@@ -85,41 +89,143 @@ public class Sub1Control  {
 		this.centrePane = centrePane;
 		this.root = root;
 	}
+	private ArrayList<String> nowPicUrl = MainMovieData.getMovieImageViewList();
 	
-	
-	@FXML 
-	public void initialize() {
-		subAnchorPane2.setVisible(false);
-		ArrayList<String> picUrl = MainMovieData.getMovieImageViewList();
-		frontSideControl(picUrl);
-		
+	private EventHandler gridPaneHandler = new EventHandler<KeyEvent>() {
 
-		//左右切换电影
-		sub1Pane.addEventHandler(KeyEvent.KEY_PRESSED, (key) ->{
-			System.out.println(key.getCode());
+
+		@Override
+		public void handle(KeyEvent keygrid) {
+			// TODO Auto-generated method stub
+			
+			if(keygrid.getCode() == KeyCode.LEFT){
+				if(x<=7&&x>-1) {
+					x--;
+				}
+				keygrid.consume();
+				String buttonId = "g"+y+""+x;
+				System.out.println(buttonId);
+				for(int i = 0 ;i < 16 ; i ++) {
+					Button but = (Button)gridPane.getChildren().get(i);
+					but.getStylesheets().clear();
+					if(but.getId().equals(buttonId)) {
+						but.getStylesheets().add(getClass().getResource("css\\CSS gridPaneButton.css").toExternalForm());
+					}
+				}
+			}
+			if(keygrid.getCode() == KeyCode.RIGHT){
+				if(x<7&&x>=-1) {
+					x++;
+				}
+				keygrid.consume();
+				String buttonId = "g"+y+""+x;
+				System.out.println(buttonId);
+				for(int i = 0 ;i < 16 ; i ++) {
+					Button but = (Button)gridPane.getChildren().get(i);
+					but.getStylesheets().clear();
+					if(but.getId().equals(buttonId)) {
+						but.getStylesheets().add(getClass().getResource("css\\CSS gridPaneButton.css").toExternalForm());
+					}
+				}
+			}
+		    if(keygrid.getCode() == KeyCode.UP){
+		    	if(y==1) {
+		    		y--;
+		    	}
+				keygrid.consume();
+				String buttonId = "g"+y+""+x;
+				System.out.println(buttonId);
+				for(int i = 0 ;i < 16 ; i ++) {
+					Button but = (Button)gridPane.getChildren().get(i);
+					but.getStylesheets().clear();
+					if(but.getId().equals(buttonId)) {
+						but.getStylesheets().add(getClass().getResource("css\\CSS gridPaneButton.css").toExternalForm());
+					}
+				}
+			}
+		    if(keygrid.getCode() == KeyCode.DOWN){
+		    	if(y==0) {
+		    		y++;
+		    	}
+				keygrid.consume();
+				String buttonId = "g"+y+""+x;
+				System.out.println(buttonId);
+				for(int i = 0 ;i < 16 ; i ++) {
+					Button but = (Button)gridPane.getChildren().get(i);
+					but.getStylesheets().clear();
+					if(but.getId().equals(buttonId)) {
+						but.getStylesheets().add(getClass().getResource("css\\CSS gridPaneButton.css").toExternalForm());
+					}
+				}
+			}
+			//这里切换不同类型电影
+		    if(keygrid.getCode() == KeyCode.ENTER){
+		    	
+				if(y == 0 && x == 0){
+					clickall();
+					keygrid.consume();
+					subAnchorPane1.requestFocus();
+					System.out.println("all movie");
+				}
+				else{
+					selectTypeAction(Types[y][x]);
+					keygrid.consume();
+					subAnchorPane1.requestFocus();
+					System.out.println("type movie");
+				}
+			}
+			//如果横坐标大于1，想当与光标移到subAnchorPane1上，可以继续左右移动电影海报操作
+			if(y > 1){
+				subAnchorPane1.requestFocus();
+				System.out.println("subAnchorPane1 is focused?" + subAnchorPane1.isFocused());
+				subAnchorPane1.removeEventHandler(KeyEvent.KEY_PRESSED, gridPaneHandler);
+				y = 0;
+				x = 0;
+				keygrid.consume();
+			}
+		}  
+	};
+	
+	
+    
+    private EventHandler anchorPaneHandler = new EventHandler<KeyEvent>() {
+
+		@Override
+		public void handle(KeyEvent key) {
+			// TODO Auto-generated method stub
 			if(key.getCode() == KeyCode.RIGHT){
-				rightAction(picUrl);
+				rightAction(nowPicUrl);
 				key.consume();
+				System.out.println("right1");
 			}
 			if(key.getCode() == KeyCode.LEFT){
-				leftAction(picUrl);
+				leftAction(nowPicUrl);
 				key.consume();
+				System.out.println("left1");
 			}
 			//进入电影信息界面
 			if(key.getCode() == KeyCode.ENTER){
 				clickView3();
 				key.consume();
+				System.out.println("enter infomation");
 			}
-			//蜜汁GRIDPANE循环
+			//向上相当于光标移到gridPane上，我现在还没有进行css的工作，所以看上去没变化
 			if(key.getCode() == KeyCode.UP){
-				System.out.println("ok");
-				//clickView3();
+				gridPane.requestFocus();
+				System.out.println("gridPane is focused?" + gridPane.isFocused());
+				gridPane.addEventHandler(KeyEvent.KEY_PRESSED, gridPaneHandler);
 				key.consume();
-			}
 			
-		});
-		//电影信息界面
-		subAnchorPane2.addEventHandler(KeyEvent.KEY_PRESSED, (key) ->{
+			}
+		}
+    	
+    };	
+    
+    private EventHandler informationHandler	= new EventHandler<KeyEvent>() {
+
+		@Override
+		public void handle(KeyEvent key) {
+			// TODO Auto-generated method stub
 			//返回
 			if(key.getCode() == KeyCode.BACK_SPACE){
 				clickBackToMenu();
@@ -130,11 +236,22 @@ public class Sub1Control  {
 				clickNowPlay();
 				key.consume();
 			}
-		});
+		}
+	
+    };
+    
+    
+    @FXML 
+	public void initialize() {
+		subAnchorPane2.setVisible(false);
+	    nowPicUrl = MainMovieData.getMovieImageViewList();
+		frontSideControl(nowPicUrl);
 		
+		//左右切换电影
+		subAnchorPane1.addEventHandler(KeyEvent.KEY_PRESSED, anchorPaneHandler);
+		//电影信息界面
+		subAnchorPane2.addEventHandler(KeyEvent.KEY_PRESSED, informationHandler);
 	}
-	
-	
 	
 	private void showInformSet(String url) {
 		
@@ -317,6 +434,7 @@ public class Sub1Control  {
 	}
 
 	private void frontSideControl(ArrayList<String> picUrl) {
+		nowPicUrl = picUrl;
 		showList = new String[5];
 		showIndex =  0;
 		int si = showIndex;
@@ -330,14 +448,14 @@ public class Sub1Control  {
 			ShowPic(picUrl.get(si+2),5);
 			showList[4] = picUrl.get(si+2);
 		}catch(Exception e) {}
-			
-	
+		//鼠标控制海报左右移动，因为在frontSideControl里，所以这里很正常
 		right.setOnAction(oa->{
 			rightAction(picUrl);
-	    });
+		});
 		left.setOnAction(oa->{
 			leftAction(picUrl);
-	    });
+		});
+		
 	}
 
 	private void selectTypeAction(String type) {

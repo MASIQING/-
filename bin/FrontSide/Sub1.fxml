@@ -31,22 +31,22 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="allmovie" mnemonicParsing="false" onMouseClicked="#clickall" prefHeight="30.0" prefWidth="116.0" text="全部" />
-                  <Button fx:id="comedy" mnemonicParsing="false" onMouseClicked="#clickComedy" prefHeight="46.25" prefWidth="110.0" text="喜剧" GridPane.columnIndex="1" />
-                  <Button fx:id="tragdy" mnemonicParsing="false" onMouseClicked="#clickTragedy" prefHeight="46.25" prefWidth="110.0" text="悲剧" GridPane.columnIndex="2" />
-                  <Button fx:id="love" mnemonicParsing="false" onMouseClicked="#clicklove" prefHeight="46.25" prefWidth="110.0" text="爱情" GridPane.columnIndex="3" />
-                  <Button fx:id="action" mnemonicParsing="false" onMouseClicked="#clickAction" prefHeight="46.25" prefWidth="110.0" text="动作" GridPane.columnIndex="4" />
-                  <Button fx:id="horrible" mnemonicParsing="false" onMouseClicked="#clickHorrible" prefHeight="49.0" prefWidth="108.0" text="恐怖" GridPane.columnIndex="5" />
-                  <Button fx:id="suspense" mnemonicParsing="false" onMouseClicked="#clickSuspense" prefHeight="46.25" prefWidth="110.0" text="悬疑" GridPane.columnIndex="6" />
-                  <Button fx:id="history" mnemonicParsing="false" onMouseClicked="#clickHistory" prefHeight="35.0" prefWidth="107.0" text="历史" GridPane.columnIndex="7" />
-                  <Button fx:id="child" mnemonicParsing="false" onMouseClicked="#clickChild" prefHeight="46.25" prefWidth="110.0" text="儿童" GridPane.rowIndex="1" />
-                  <Button fx:id="music" mnemonicParsing="false" onMouseClicked="#clickMusic" prefHeight="46.25" prefWidth="110.0" text="音乐" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button fx:id="adventure" mnemonicParsing="false" onMouseClicked="#clickAdventure" prefHeight="46.25" prefWidth="110.0" text="冒险" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Button fx:id="sciencefiction" mnemonicParsing="false" onMouseClicked="#clickSciencefiction" prefHeight="46.25" prefWidth="110.0" text="科幻" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <Button fx:id="chinese" mnemonicParsing="false" onMouseClicked="#clickChinese" prefHeight="30.0" prefWidth="139.0" text="中国" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <Button fx:id="europeAndUS" mnemonicParsing="false" onMouseClicked="#clickEUUS" prefHeight="64.0" prefWidth="108.0" text="欧美" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                  <Button fx:id="japanAndKorea" mnemonicParsing="false" onMouseClicked="#clickJPKA" prefHeight="30.0" prefWidth="129.0" text="日韩" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                  <Button fx:id="other" mnemonicParsing="false" onMouseClicked="#clickOther" prefHeight="30.0" prefWidth="118.0" text="其他" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                  <Button fx:id="g00" mnemonicParsing="false" onMouseClicked="#clickall" prefHeight="30.0" prefWidth="116.0" text="全部" />
+                  <Button fx:id="g01" mnemonicParsing="false" onMouseClicked="#clickComedy" prefHeight="46.25" prefWidth="110.0" text="喜剧" GridPane.columnIndex="1" />
+                  <Button fx:id="g02" mnemonicParsing="false" onMouseClicked="#clickTragedy" prefHeight="46.25" prefWidth="110.0" text="悲剧" GridPane.columnIndex="2" />
+                  <Button fx:id="g03" mnemonicParsing="false" onMouseClicked="#clicklove" prefHeight="46.25" prefWidth="110.0" text="爱情" GridPane.columnIndex="3" />
+                  <Button fx:id="g04" mnemonicParsing="false" onMouseClicked="#clickAction" prefHeight="46.25" prefWidth="110.0" text="动作" GridPane.columnIndex="4" />
+                  <Button fx:id="g05" mnemonicParsing="false" onMouseClicked="#clickHorrible" prefHeight="49.0" prefWidth="108.0" text="恐怖" GridPane.columnIndex="5" />
+                  <Button fx:id="g06" mnemonicParsing="false" onMouseClicked="#clickSuspense" prefHeight="46.25" prefWidth="110.0" text="悬疑" GridPane.columnIndex="6" />
+                  <Button fx:id="g07" mnemonicParsing="false" onMouseClicked="#clickHistory" prefHeight="35.0" prefWidth="107.0" text="历史" GridPane.columnIndex="7" />
+                  <Button fx:id="g10" mnemonicParsing="false" onMouseClicked="#clickChild" prefHeight="46.25" prefWidth="110.0" text="儿童" GridPane.rowIndex="1" />
+                  <Button fx:id="g11" mnemonicParsing="false" onMouseClicked="#clickMusic" prefHeight="46.25" prefWidth="110.0" text="音乐" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button fx:id="g12" mnemonicParsing="false" onMouseClicked="#clickAdventure" prefHeight="46.25" prefWidth="110.0" text="冒险" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button fx:id="g13" mnemonicParsing="false" onMouseClicked="#clickSciencefiction" prefHeight="46.25" prefWidth="110.0" text="科幻" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Button fx:id="g14" mnemonicParsing="false" onMouseClicked="#clickChinese" prefHeight="30.0" prefWidth="139.0" text="中国" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Button fx:id="g15" mnemonicParsing="false" onMouseClicked="#clickEUUS" prefHeight="64.0" prefWidth="108.0" text="欧美" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <Button fx:id="g16" mnemonicParsing="false" onMouseClicked="#clickJPKA" prefHeight="30.0" prefWidth="129.0" text="日韩" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                  <Button fx:id="g17" mnemonicParsing="false" onMouseClicked="#clickOther" prefHeight="30.0" prefWidth="118.0" text="其他" GridPane.columnIndex="7" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <Line endX="862.0" stroke="#757575" strokeWidth="3.0" />

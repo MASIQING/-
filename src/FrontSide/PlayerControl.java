@@ -1,10 +1,8 @@
 package FrontSide;
 
-import java.awt.event.KeyListener;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
@@ -38,11 +36,16 @@ public class PlayerControl {
 		@FXML private AnchorPane settingPane;
 		@FXML private AnchorPane mediaPane;
 		@FXML private ImageView volumeImage;
+		private MenuControl mcControl;
 		private String mediaLocation;
 	    private MediaPlayer mediaPlayer;
 	    private Timer timer = new Timer();
 	    private double volume;
 	   
+	    public void setMenuControl(MenuControl mcControl) {
+	    	this.mcControl = mcControl;
+	    }
+	    
 	    /**
 	     * 设置电影文件的URL
 	     * **/
@@ -138,6 +141,8 @@ public class PlayerControl {
 				}
 				
 				if(key.getCode() == KeyCode.MULTIPLY){
+					System.out.println("pcControl "+mcControl);
+					mcControl.startKeyListening();
 					//写入返回选择菜单方法
 					key.consume();
 				}
