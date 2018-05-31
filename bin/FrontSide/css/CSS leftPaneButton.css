@@ -1,0 +1,23 @@
+#allMovie{
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/menu.png);
+	-fx-border-color: #4F4F4F;
+	-fx-border-radius: 2;
+    -fx-border-width: 3;
+}
+
+#nowPlaying{
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/play.png);
+	-fx-border-color: #4F4F4F;
+	-fx-border-radius: 2;
+    -fx-border-width: 3;
+}
+
+#settings{
+	-fx-background-color: #FFFFFF;
+	-fx-background-image:url(/FrontSide/frontSidePicture/setting.png);
+	-fx-border-color: #4F4F4F;
+	-fx-border-radius: 2;
+    -fx-border-width: 3;
+}

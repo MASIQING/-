@@ -65,6 +65,12 @@ public class PlayerControl {
 			}
 		}
 	    
+	    /**使聚焦**/
+	    public void fatherPaneFocus() {
+	    	settingPane.requestFocus();
+	    	System.out.println("settingPane Focus "+settingPane.isFocused());
+	    }
+	    
 		/**
 		 * PlayerControl的初始化<br>
 		 * 清除所有的样式并应用最新的样式
@@ -73,9 +79,8 @@ public class PlayerControl {
 		public void initialize() {
 			playPause.getStylesheets().clear();
 			playPause.getStylesheets().addAll(paused);
-			slider.requestFocus();
 			
-			slider.addEventFilter(KeyEvent.KEY_PRESSED, (key) ->{
+			settingPane.addEventFilter(KeyEvent.KEY_PRESSED, (key) ->{
 				MediaPlayer mediaPlayer = backSide.getMediaPlayer();
 				
 				if(key.getCode() == KeyCode.ADD){
@@ -125,10 +130,9 @@ public class PlayerControl {
 					key.consume();
 				}
 				
-				if(key.getCode() == KeyCode.MULTIPLY){
-					//System.out.println("pcControl "+mcControl);
-					//mcControl.startKeyListening();
-					//写入返回选择菜单方法
+				if(key.getCode() == KeyCode.BACK_SPACE){
+					MenuControl menuControl = backSide.getMenuControl();
+	                menuControl.leftPaneFocus(1);
 					key.consume();
 				}
 				

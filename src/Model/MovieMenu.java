@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 import Data.MainMovieData;
 import Data.WebCrawerTools;
+import FrontSide.MenuControl;
 import FrontSide.PlayerControl;
 import FrontSide.movieMenuControl;
 import javafx.scene.Parent;
@@ -24,7 +25,7 @@ import javafx.scene.layout.AnchorPane;
  * **/
 public class MovieMenu  {
 	
-	
+	private MenuControl menuControl; //功能栏控制器
 	private movieMenuControl frontSide; //对应的前端对象
 	private PlayerControl playerControl; //播放器控制对象
 	private AnchorPane centrePane; //界面中部可替换布局
@@ -43,12 +44,23 @@ public class MovieMenu  {
 	
 	/**初始化上级对象**/
     public void setFatherObject(PlayerControl playerControl,movieMenuControl frontSide 
-			                       ,AnchorPane centrePane,Parent root) {
+			                    ,AnchorPane centrePane,Parent root,MenuControl menuControl) {
 		this.playerControl = playerControl; 
 		this.frontSide = frontSide;
 		this.centrePane = centrePane;
 		this.mediaPlayerRoot = root;
+		this.menuControl = menuControl;
 	}
+    
+    /**初始化PicList**/
+    public void initialPicList() {
+    	nowPicUrlList = MainMovieData.getMovieImageViewList();
+    }
+    
+    /**获得功能栏控制器**/
+    public MenuControl getMenuControl() {
+    	return menuControl;
+    }
 	
 	/**改变语言**/
     public void changeLanguage(String language) {
@@ -61,7 +73,6 @@ public class MovieMenu  {
 			if(nowMovieUrl!=null) {
 				frontSide.showInform(getInformList(nowMovieUrl));
 			}		
-			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
 
 public class MediaPlay {
 
-	private MenuControl mcControl;
+	private MenuControl menuControl;
 	private String mediaURL;
 	private MediaPlayer mediaPlayer;
    
@@ -24,7 +24,11 @@ public class MediaPlay {
 	}
     
     public void setMenuControl(MenuControl mcControl) {
-    	this.mcControl = mcControl;
+    	this.menuControl = mcControl;
+    }
+    
+    public MenuControl getMenuControl() {
+    	return menuControl;
     }
     
     public MediaPlayer startMediaPlayer() {

@@ -169,8 +169,14 @@ public class movieMenuControl  {
 					subAnchorPane1.requestFocus();
 					System.out.println("type movie");
 				}
-		    	
 			}
+		    
+		    /**返回左侧功能栏**/
+			if(key.getCode() == KeyCode.BACK_SPACE){
+				MenuControl menuControl = backSide.getMenuControl();
+                menuControl.leftPaneFocus(0);
+			}
+			
 			//如果横坐标大于1，想当与光标移到subAnchorPane1上，可以继续左右移动电影海报操作
 			if(y > 1){
 				
@@ -185,11 +191,16 @@ public class movieMenuControl  {
 			    y--;
 				key.consume();
 			}
+			
+			/**返回左侧功能栏**/
+			if(x==-1) {
+				MenuControl menuControl = backSide.getMenuControl();
+                menuControl.leftPaneFocus(0);
+			}
 		}  
 	};
 	 
     private EventHandler<KeyEvent> anchorPaneHandler = new EventHandler<KeyEvent>() {
-
 
 		@Override
 		public void handle(KeyEvent key) {
@@ -213,7 +224,7 @@ public class movieMenuControl  {
 			//向上相当于光标移到gridPane上
 			if(key.getCode() == KeyCode.UP){
 				gridPane.requestFocus();
-				System.out.println("gridPane is focused?" + gridPane.isFocused());
+				System.out.println("gridPane is focused?" + gridPane.isFocused()+x+" "+y);
 				gridPane.addEventHandler(KeyEvent.KEY_PRESSED, gridPaneHandler);
 				
 				for(int i = 0 ;i < 16 ; i ++) {
@@ -223,10 +234,9 @@ public class movieMenuControl  {
 						but.getStylesheets().add(focusedCss2);
 					}
 				}
-				
 				key.consume();
-			
 			}
+			
 		}
     	
     };	
@@ -274,6 +284,13 @@ public class movieMenuControl  {
     /**使聚焦**/
     public void subAnchorPane1Focus() {
     	subAnchorPane1.requestFocus();
+    	Button but = (Button)gridPane.getChildren().get(0);
+		but.getStylesheets().clear();
+		but.getStylesheets().add(focusedCss1);
+		x = 0;
+		y = 0;
+		backSide.initialPicList();
+		backSide.showPicInitial();
     }
     
     /**返回我的后端**/
@@ -285,9 +302,9 @@ public class movieMenuControl  {
 	
     /**后端初始化并启动**/
     public void backSideStart(PlayerControl playerControl,movieMenuControl frontSide 
-                                ,AnchorPane centrePane   ,     Parent mediaPlayerRoot) {
+                             ,AnchorPane centrePane, Parent mediaPlayerRoot,MenuControl menuControl) {
     	
-    	backSide.setFatherObject(playerControl, frontSide, centrePane, mediaPlayerRoot);
+    	backSide.setFatherObject(playerControl, frontSide, centrePane, mediaPlayerRoot,menuControl);
     	backSide.showPicInitial();
     
     }

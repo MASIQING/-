@@ -3,6 +3,7 @@ package FrontSide;
 import java.io.IOException;
 
 import Model.MovieMenu;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -39,7 +40,106 @@ public class MenuControl {
 	private Parent pcRoot;
 	private Parent sbRoot;
 	private String originCSS = "css\\CSS White.css";
-	//private MovieMenu movieMenub = new MovieMenu();
+	private String focusedCss = getClass().getResource("css\\CSS leftPaneButton.css").toExternalForm();
+	int y = 0;
+	
+	private EventHandler<KeyEvent> leftPaneHandler = new EventHandler<KeyEvent>() {
+		@Override
+		public void handle(KeyEvent key) {
+			
+			if(key.getCode() == KeyCode.UP) {
+				if(y>0) {
+					y--;
+				}
+				showCssInButton(y);
+				key.consume();
+			}
+			
+			if(key.getCode() == KeyCode.DOWN) {
+				if(y<2) {
+					y++;
+				}
+				showCssInButton(y);
+				key.consume();
+			}
+			
+			if(key.getCode() == KeyCode.ENTER) {
+				enterSubPane();
+				key.consume();
+			}
+			
+            if(key.getCode() == KeyCode.RIGHT) {
+            	enterSubPane();
+            	key.consume();
+			}
+		}
+	};
+	
+	public void enterSubPane() {
+		allMovie.getStylesheets().clear();
+		nowPlaying.getStylesheets().clear();
+		settings.getStylesheets().clear();
+		switch(y) {
+			default:{}	
+			case 0:{
+				clickedAllMovie();
+				break;
+			}
+			case 1:{
+				mediaPlay();
+				break;
+			}
+			case 2:{
+				clickedSettings();
+				break;
+			}
+	    }
+		System.out.println("DELETEFOCUS" +leftPane.isFocused());
+	}
+	
+	public void showCssInButton(int y) {
+		allMovie.getStylesheets().clear();
+		nowPlaying.getStylesheets().clear();
+		settings.getStylesheets().clear();
+		
+		switch(y) {
+		    default:{}
+			case 0:{
+				allMovie.getStylesheets().add(focusedCss);
+				break;
+			}
+			case 1:{
+				nowPlaying.getStylesheets().add(focusedCss);
+				break;
+			}
+			case 2:{
+				settings.getStylesheets().add(focusedCss);
+				break;
+			}
+		}
+	}
+	
+	public void leftPaneFocus(int y) {
+		leftPane.requestFocus();
+		System.out.println("LEFT_PANE FOCUSED "+leftPane.isFocused());
+		switch(y) {
+			default:{}
+			case 0:{
+				allMovie.getStylesheets().add(focusedCss);
+				break;
+			}
+			case 1:{
+				nowPlaying.getStylesheets().add(focusedCss);
+				break;
+			}
+			case 2:{
+				settings.getStylesheets().add(focusedCss);
+				break;
+			}
+		}
+		
+	}
+	
 	public void setMenuControl(MenuControl mcControl) {
 		this.mcControl = mcControl;
 	}
@@ -116,17 +216,14 @@ public class MenuControl {
 			sbRoot.getStylesheets().add(getClass().getResource(originCSS).toExternalForm());
 			
 			centrePane.getChildren().clear();
-			    if(playerControl.getBackSide().getStatus() == 0) {
-			    	playerControl.setMediaURL("movie\\China Eastern Airlines B777-300ER Safety video (English).mp4");
-			    	playerControl.mediaPlay();
-			    }
-		    centrePane.getChildren().addAll(pcRoot);
+		    centrePane.getChildren().addAll(sbRoot);
 	
+		    leftPane.addEventHandler(KeyEvent.KEY_PRESSED, leftPaneHandler);
 	}
 	
 	public void diliverControler() {
 		playerControl.getBackSide().setMenuControl(mcControl);
-		sub1Control.backSideStart(playerControl,sub1Control,centrePane, pcRoot);
+		sub1Control.backSideStart(playerControl,sub1Control,centrePane, pcRoot,mcControl);
 	}
 	
 	public void startKeyListening() {
@@ -137,7 +234,6 @@ public class MenuControl {
 			
 			System.out.println(key.getCode());
 			if(key.getCode() == KeyCode.ENTER){
-				
 				key.consume();
 			}
 			
@@ -161,6 +257,7 @@ public class MenuControl {
 		    	playerControl.mediaPlay();
 		    }
 	        centrePane.getChildren().addAll(pcRoot);
+	        playerControl.fatherPaneFocus();
 	}
 	
 	
@@ -172,12 +269,10 @@ public class MenuControl {
         	sub1Control.subAnchorPane1Focus();
 	}
 	
-	
-	
+
 	//点击“个人设置”
 	@FXML
 	public void clickedSettings() {
-			
 			centrePane.getChildren().clear();
 			opControl.setRoot(opRoot, sbRoot, pcRoot,mcRoot);
 			opControl.setMovieMenu(sub1Control.getBackSide());
