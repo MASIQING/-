@@ -450,8 +450,10 @@ public class DatabaseOperation {
 			stmt.close();
 			conn.close();
 		} catch (SQLException se) {
+			System.out.println("dbop cant find the type");
 			se.printStackTrace();
 		} catch (Exception e) {
+			System.out.println("dbop cant find the type");
 			e.printStackTrace();
 		} finally {
 			try {

@@ -75,15 +75,18 @@ public class movieMenuControl  {
 	private int y = 0;
 	private int x = 0;
 	
+	private String focusedCss1 = getClass().getResource("css\\CSS gridPaneButton1.css").toExternalForm();
+	private String focusedCss2 = getClass().getResource("css\\CSS gridPaneButton2.css").toExternalForm();
+	
 	private String[][] Types = {{"全部", "喜剧", "悲剧", "爱情", "动作", "恐怖", "悬疑", "历史"},
 		       {"儿童", "音乐", "冒险", "科幻", "中国", "欧美", "日韩", "其他"}};	
 
-	//private ArrayList<String> nowPicUrl = MainMovieData.getMovieImageViewList();
-	
 	private EventHandler<KeyEvent> gridPaneHandler = new EventHandler<KeyEvent>() {
 		@Override
 		public void handle(KeyEvent key) {
 			// TODO Auto-generated method stub
+			System.out.println(x+" "+y);
+			
 			
 			if(key.getCode() == KeyCode.LEFT){
 				if(x<=7&&x>-1) {
@@ -96,7 +99,7 @@ public class movieMenuControl  {
 					Button but = (Button)gridPane.getChildren().get(i);
 					but.getStylesheets().clear();
 					if(but.getId().equals(buttonId)) {
-						but.getStylesheets().add(getClass().getResource("css\\CSS gridPaneButton.css").toExternalForm());
+						but.getStylesheets().add(focusedCss2);
 					}
 				}
 			}
@@ -111,7 +114,7 @@ public class movieMenuControl  {
 					Button but = (Button)gridPane.getChildren().get(i);
 					but.getStylesheets().clear();
 					if(but.getId().equals(buttonId)) {
-						but.getStylesheets().add(getClass().getResource("css\\CSS gridPaneButton.css").toExternalForm());
+						but.getStylesheets().add(focusedCss2);
 					}
 				}
 			}
@@ -126,14 +129,12 @@ public class movieMenuControl  {
 					Button but = (Button)gridPane.getChildren().get(i);
 					but.getStylesheets().clear();
 					if(but.getId().equals(buttonId)) {
-						but.getStylesheets().add(getClass().getResource("css\\CSS gridPaneButton.css").toExternalForm());
+						but.getStylesheets().add(focusedCss2);
 					}
 				}
 			}
 		    if(key.getCode() == KeyCode.DOWN){
-		    	if(y==0) {
-		    		y++;
-		    	}
+		        y++;
 				key.consume();
 				String buttonId = "g"+y+""+x;
 				System.out.println(buttonId);
@@ -141,14 +142,22 @@ public class movieMenuControl  {
 					Button but = (Button)gridPane.getChildren().get(i);
 					but.getStylesheets().clear();
 					if(but.getId().equals(buttonId)) {
-						but.getStylesheets().add(getClass().getResource("css\\CSS gridPaneButton.css").toExternalForm());
+						but.getStylesheets().add(focusedCss2);
 					}
 				}
 			}
 			//这里切换不同类型电影
 		    if(key.getCode() == KeyCode.ENTER){
 		    	
-				if(y == 0 && x == 0){
+		    	for(int i = 0 ;i < 16 ; i ++) {
+					Button but = (Button)gridPane.getChildren().get(i);
+					but.getStylesheets().clear();
+					if(but.getId().equals("g"+y+""+x)) {
+						but.getStylesheets().add(focusedCss1);
+					}
+				}
+		    	
+		    	if(y == 0 && x == 0){
 					clickall();
 					key.consume();
 					subAnchorPane1.requestFocus();
@@ -160,14 +169,20 @@ public class movieMenuControl  {
 					subAnchorPane1.requestFocus();
 					System.out.println("type movie");
 				}
+		    	
 			}
 			//如果横坐标大于1，想当与光标移到subAnchorPane1上，可以继续左右移动电影海报操作
 			if(y > 1){
+				
+				for(int i = 0 ;i < 16 ; i ++) {
+					Button but = (Button)gridPane.getChildren().get(i);
+					but.getStylesheets().clear();
+				}
+				
 				subAnchorPane1.requestFocus();
 				System.out.println("subAnchorPane1 is focused?" + subAnchorPane1.isFocused());
 				subAnchorPane1.removeEventHandler(KeyEvent.KEY_PRESSED, gridPaneHandler);
-				y = 0;
-				x = 0;
+			    y--;
 				key.consume();
 			}
 		}  
@@ -195,11 +210,20 @@ public class movieMenuControl  {
 				key.consume();
 				System.out.println("enter infomation");
 			}
-			//向上相当于光标移到gridPane上，我现在还没有进行css的工作，所以看上去没变化
+			//向上相当于光标移到gridPane上
 			if(key.getCode() == KeyCode.UP){
 				gridPane.requestFocus();
 				System.out.println("gridPane is focused?" + gridPane.isFocused());
 				gridPane.addEventHandler(KeyEvent.KEY_PRESSED, gridPaneHandler);
+				
+				for(int i = 0 ;i < 16 ; i ++) {
+					Button but = (Button)gridPane.getChildren().get(i);
+					but.getStylesheets().clear();
+					if(but.getId().equals("g"+y+""+x)) {
+						but.getStylesheets().add(focusedCss2);
+					}
+				}
+				
 				key.consume();
 			
 			}
@@ -215,6 +239,7 @@ public class movieMenuControl  {
 			//返回
 			if(key.getCode() == KeyCode.BACK_SPACE){
 				clickBackToMenu();
+				subAnchorPane1.requestFocus();
 				key.consume();
 			}
 			//播放
@@ -238,9 +263,19 @@ public class movieMenuControl  {
 		subAnchorPane1.addEventHandler(KeyEvent.KEY_PRESSED, anchorPaneHandler);
 		//电影信息界面
 		subAnchorPane2.addEventHandler(KeyEvent.KEY_PRESSED, informationHandler);
-	
+		
+		subAnchorPane1.requestFocus();
+		Button but = (Button)gridPane.getChildren().get(0);
+		but.getStylesheets().clear();
+		but.getStylesheets().add(focusedCss1);
+		
     }
 	
+    /**使聚焦**/
+    public void subAnchorPane1Focus() {
+    	subAnchorPane1.requestFocus();
+    }
+    
     /**返回我的后端**/
     public MovieMenu getBackSide() {
     	
@@ -266,6 +301,19 @@ public class movieMenuControl  {
 		imageView4.setImage(null);
 		imageView5.setImage(null);
 	
+	}
+	
+	/**刷新gridPane**/
+	private void gridPaneRefresh(int x, int y) {
+		for(int i = 0 ;i < 16 ; i ++) {
+			Button but = (Button)gridPane.getChildren().get(i);
+			but.getStylesheets().clear();
+			if(but.getId().equals("g"+y+""+x)) {
+				but.getStylesheets().add(focusedCss2);
+			}
+		}
+		this.x = x;
+		this.y = y;
 	}
 	
 	/**显示电影信息**/
@@ -329,17 +377,35 @@ public class movieMenuControl  {
     }
 	
     /**在指定id的位置显示图片**/
-	public void ShowPic(String picUrl,int id) {
+	public void showPic(String picUrl,int id,boolean error,String language) {
 		
-		Image img = new Image(movieMenuControl.class.getResourceAsStream("moviePicture\\"+picUrl));
-		System.out.println("img"+imageView1);
-		switch(id) {
-		default: ;
-		case 1:imageView1.setImage(img);break;
-		case 2:imageView2.setImage(img);break;
-		case 3:imageView3.setImage(img);break;
-		case 4:imageView4.setImage(img);break;
-		case 5:imageView5.setImage(img);break;
+        if(error==true) {
+        	Image img = null;
+        	if(language.equals("CHINESE")) {
+        		img = new Image(movieMenuControl.class.getResourceAsStream("frontSidePicture\\noMovie(CN).jpg"));
+        	}else if(language.equals("ENGLISH")){
+        		img = new Image(movieMenuControl.class.getResourceAsStream("frontSidePicture\\noMovie(EN).jpg"));
+        	}
+        	imageView3.setImage(img);
+        	imageView1.setImage(null);
+        	imageView2.setImage(null);
+        	imageView4.setImage(null);
+        	imageView5.setImage(null);
+        	
+        	
+		}else {
+		    Image img = new Image(movieMenuControl.class.getResourceAsStream("moviePicture\\"+picUrl));
+		    System.out.println(img.getHeight()+"   "+img.getWidth());
+		    System.out.println("img"+imageView1);
+		
+		    switch(id) {
+		    default: ;
+		    case 1:imageView1.setImage(img);break;
+		    case 2:imageView2.setImage(img);break;
+		    case 3:imageView3.setImage(img);break;
+		    case 4:imageView4.setImage(img);break;
+		    case 5:imageView5.setImage(img);break;
+		    }
 		}
 	
 	}
@@ -402,33 +468,79 @@ public class movieMenuControl  {
 	@FXML
 	public void clickall() { backSide.clickAll();}
 	@FXML
-	public void clickSciencefiction() { backSide.selectTypeAction("科幻");}
+	public void clickSciencefiction() { 
+		backSide.selectTypeAction("科幻");
+		gridPaneRefresh(3,1);
+	}
+	
 	@FXML
-	public void clickComedy() { backSide.selectTypeAction("喜剧");}
+	public void clickComedy() { 
+		backSide.selectTypeAction("喜剧");
+		gridPaneRefresh(1,0);
+	}
 	@FXML
-	public void clickTragedy() { backSide.selectTypeAction("悲剧");}
+	public void clickTragedy() { 
+		backSide.selectTypeAction("悲剧");
+		gridPaneRefresh(2,0);
+	}
 	@FXML
-	public void clicklove() { backSide.selectTypeAction("爱情");}
+	public void clicklove() { 
+		backSide.selectTypeAction("爱情");
+		gridPaneRefresh(3,0);
+	}
 	@FXML
-	public void clickAction() { backSide.selectTypeAction("动作");}	
+	public void clickAction() { 
+		backSide.selectTypeAction("动作");
+		gridPaneRefresh(4,0);
+	}	
 	@FXML
-	public void clickHorrible() { backSide.selectTypeAction("恐怖");}	
+	public void clickHorrible() { 
+		backSide.selectTypeAction("恐怖");
+		gridPaneRefresh(5,0);
+	}	
 	@FXML
-	public void clickSuspense() { backSide.selectTypeAction("悬疑");}	
+	public void clickSuspense() { 
+		backSide.selectTypeAction("悬疑");
+		gridPaneRefresh(6,0);
+	}	
 	@FXML
-	public void clickHistory() { backSide.selectTypeAction("历史");}	
+	public void clickHistory() { 
+		backSide.selectTypeAction("历史");
+		gridPaneRefresh(7,0);
+	}	
 	@FXML
-	public void clickMusic() { backSide.selectTypeAction("音乐");}	
+	public void clickMusic() { 
+		backSide.selectTypeAction("音乐");
+		gridPaneRefresh(1,1);
+	}	
 	@FXML
-	public void clickAdventure() { backSide.selectTypeAction("冒险");}	
+	public void clickAdventure() { 
+		backSide.selectTypeAction("冒险");
+		gridPaneRefresh(2,1);
+	}	
 	@FXML
-	public void clickChild() { backSide.selectTypeAction("儿童");}
+	public void clickChild() { 
+		backSide.selectTypeAction("儿童");
+		gridPaneRefresh(0,1);
+	}
 	@FXML
-	public void clickChinese() { backSide.selectTypeAction("中国");}
+	public void clickChinese() { 
+		backSide.selectTypeAction("中国");
+		gridPaneRefresh(4,1);
+	}
 	@FXML
-	public void clickEUUS() { backSide.selectTypeAction("欧美");}
+	public void clickEUUS() { 
+		backSide.selectTypeAction("欧美");
+		gridPaneRefresh(5,1);
+	}
 	@FXML
-	public void clickJPKA() { backSide.selectTypeAction("日韩");}
+	public void clickJPKA() { 
+		backSide.selectTypeAction("日韩");
+		gridPaneRefresh(6,1);
+	}
 	@FXML
-	public void clickOther() { backSide.selectTypeAction("其他");}
+	public void clickOther() { 
+		backSide.selectTypeAction("其他");
+		gridPaneRefresh(7,1);
+	}
 }

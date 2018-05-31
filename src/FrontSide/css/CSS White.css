@@ -117,7 +117,8 @@
 
 }
 .button:hover{
-	-fx-background-color: #d0d0d0;
+	-fx-background-color: #444444;
+	-fx-text-fill: #FFFFFF;
 	-fx-background-radius: 0;  
 }
 

@@ -44,15 +44,22 @@ public class MainMovieData {
 	// 电影信息的ArrayList
 	public static ArrayList<String> getTypeMovieImageViewlist(String type) {
 		// 将每一个电影的电影信息转化为一个个字符串，然后再添加到ArrayList中
-		String[][] movieTypeList = getTypeMovieInformation(type);
-		String moInfo = "";
+		
 		ArrayList<String> list = new ArrayList<String>();
-		for (int i = 0; i < movieTypeList.length; i++) {
-			moInfo += movieTypeList[i][2] + " ";
-			list.add(moInfo);
-			moInfo = "";
+		try {
+			String[][] movieTypeList = getTypeMovieInformation(type);
+			String moInfo = "";
+			for (int i = 0; i < movieTypeList.length; i++) {
+				moInfo += movieTypeList[i][2] + " ";
+				list.add(moInfo);
+				moInfo = "";
+			}
+		}catch(Exception e) {
+			System.out.println("Can't find the type");
+			return null;
 		}
 		return list;
+		
 	}
 
 	public static ArrayList<String> getMovieImageViewList() {

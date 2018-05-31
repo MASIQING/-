@@ -169,6 +169,7 @@ public class MenuControl {
 	public void clickedAllMovie() {
         	centrePane.getChildren().clear();
         	centrePane.getChildren().addAll(sbRoot);
+        	sub1Control.subAnchorPane1Focus();
 	}
 	
 	

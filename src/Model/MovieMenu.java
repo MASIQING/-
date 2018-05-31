@@ -155,25 +155,25 @@ public class MovieMenu  {
 		}
 		int si2 = showIndex;
 		try {
-			frontSide.ShowPic(nowPicUrlList.get(si2-2),1);
+			frontSide.showPic(nowPicUrlList.get(si2-2),1,false,null);
 			showList[0] = nowPicUrlList.get(si2-2);
 		}catch(Exception e) {}
 		try {
-			frontSide.ShowPic(nowPicUrlList.get(si2-1),2);
+			frontSide.showPic(nowPicUrlList.get(si2-1),2,false,null);
 			showList[1] = nowPicUrlList.get(si2-1);
 		}catch(Exception e) {}
 		try {
-			frontSide.ShowPic(nowPicUrlList.get(si2),3);
+			frontSide.showPic(nowPicUrlList.get(si2),3,false,null);
 			showList[2] = nowPicUrlList.get(si2);
 		}catch(Exception e) {}
 		try {
-			frontSide.ShowPic(nowPicUrlList.get(si2+1),4);
+			frontSide.showPic(nowPicUrlList.get(si2+1),4,false,null);
 			showList[3] = nowPicUrlList.get(si2+1);
 		}catch(Exception e) {
 			rightRun = false;
 	    }
 		try {
-			frontSide.ShowPic(nowPicUrlList.get(si2+2),5);
+			frontSide.showPic(nowPicUrlList.get(si2+2),5,false,null);
 			showList[4] = nowPicUrlList.get(si2+2);
 		}catch(Exception e) {}
 		
@@ -188,29 +188,33 @@ public class MovieMenu  {
 		}
 		int si2 = showIndex;
 		try {
-			frontSide.ShowPic(nowPicUrlList.get(si2-2),1);
+			frontSide.showPic(nowPicUrlList.get(si2-2),1,false,null);
 			showList[0] = nowPicUrlList.get(si2-2);
 		}catch(Exception e) {}
 		try {
-			frontSide.ShowPic(nowPicUrlList.get(si2-1),2);
+			frontSide.showPic(nowPicUrlList.get(si2-1),2,false,null);
 			showList[1] = nowPicUrlList.get(si2-1);
 		}catch(Exception e) {
 		    leftRun = false;
 		}
 		try {
-			frontSide.ShowPic(nowPicUrlList.get(si2),3);
+			frontSide.showPic(nowPicUrlList.get(si2),3,false,null);
 			showList[2] = nowPicUrlList.get(si2);
 		}catch(Exception e) {}
 		try {
-			frontSide.ShowPic(nowPicUrlList.get(si2+1),4);
+			frontSide.showPic(nowPicUrlList.get(si2+1),4,false,null);
 			showList[3] = nowPicUrlList.get(si2+1);
 		}catch(Exception e) {}
 		try {
-			frontSide.ShowPic(nowPicUrlList.get(si2+2),5);
+			frontSide.showPic(nowPicUrlList.get(si2+2),5,false,null);
 			showList[4] = nowPicUrlList.get(si2+2);
 		}catch(Exception e) {}
 		
 		
+	}
+	/**显示报错图片**/
+	public void showPicError() {
+		frontSide.showPic("ERROR", 3,true,language);
 	}
 
 	/**初始化影片浏览器**/
@@ -219,14 +223,14 @@ public class MovieMenu  {
 		showIndex =  0;
 		int si = showIndex;
 		System.out.println("1"+frontSide);
-		frontSide.ShowPic(nowPicUrlList.get(si),3);
+		frontSide.showPic(nowPicUrlList.get(si),3,false,null);
 		showList[2] = nowPicUrlList.get(si);
 		try {
-			frontSide.ShowPic(nowPicUrlList.get(si+1),4);
+			frontSide.showPic(nowPicUrlList.get(si+1),4,false,null);
 			showList[3] = nowPicUrlList.get(si+1);
 		}catch(Exception e) {}
 		try {
-			frontSide.ShowPic(nowPicUrlList.get(si+2),5);
+			frontSide.showPic(nowPicUrlList.get(si+2),5,false,null);
 			showList[4] = nowPicUrlList.get(si+2);
 		}catch(Exception e) {}
 	}
@@ -241,8 +245,13 @@ public class MovieMenu  {
 	/**选择特定类型的影片**/
 	public void selectTypeAction(String type) {
 		nowPicUrlList = MainMovieData.getTypeMovieImageViewlist(type);
-		frontSide.initialClear();
-		showPicInitial();
+		System.out.println("NPC    "+nowPicUrlList);
+		if(!nowPicUrlList.isEmpty()) {
+			frontSide.initialClear();
+			showPicInitial();
+		}else {
+			showPicError();
+		}
 	}
     
 	/**将选中的图片传至电影信息界面的大图**/
