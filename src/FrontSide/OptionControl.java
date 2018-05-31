@@ -1,5 +1,6 @@
 package FrontSide;
 
+import Model.MovieMenu;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
@@ -31,7 +32,7 @@ public class OptionControl {
 	private Parent sbRoot;
 	private Parent pcRoot;
 	private Parent mcRoot;
-	private Sub1Control sbControl;
+	private MovieMenu movieMenub;
 	private String language = "CHINESE";
 	private String cssName = "DEFAULT";
 	
@@ -50,8 +51,8 @@ public class OptionControl {
 	/**
 	 * 初始化，传入电影选择界面的控制器
 	 * **/
-	public void setControler(Sub1Control sbControl) {
-		this.sbControl = sbControl;
+	public void setMovieMenu(MovieMenu movieMenub) {
+		this.movieMenub = movieMenub;
 	}
 	
 	
@@ -103,14 +104,14 @@ public class OptionControl {
 	private void changeLanguage() {
 		selectLanguage.setText("语言 Language");
 		if(language.equals("ENGLISH")) {
-			sbControl.changeLanguage("ENGLISH");
+			movieMenub.changeLanguage("ENGLISH");
 			selectCSS.setText("Select Theme");
 			selectWhite.setText("Bright");
 			selectBlue.setText("Dark Blue");
 			selectBlack.setText("Black");
 			confirm.setText("Apply");
 		}else if(language.equals("CHINESE")) {
-			sbControl.changeLanguage("CHINESE");
+			movieMenub.changeLanguage("CHINESE");
 			selectCSS.setText("界面主题");
 			selectWhite.setText("浅色主题");
 			selectBlue.setText("深海蓝");

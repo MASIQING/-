@@ -1,6 +1,8 @@
 package FrontSide;
 
 import java.io.IOException;
+
+import Model.MovieMenu;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -30,14 +32,14 @@ public class MenuControl {
 	@FXML private Button nowPlaying;
 	private MenuControl mcControl;
 	private PlayerControl playerControl;
-	private Sub1Control sub1Control;
+	private movieMenuControl sub1Control;
 	private OptionControl opControl;
 	private Parent mcRoot;
 	private Parent opRoot;
 	private Parent pcRoot;
 	private Parent sbRoot;
 	private String originCSS = "css\\CSS White.css";
- 
+	//private MovieMenu movieMenub = new MovieMenu();
 	public void setMenuControl(MenuControl mcControl) {
 		this.mcControl = mcControl;
 	}
@@ -48,7 +50,7 @@ public class MenuControl {
 		System.out.println("MENUCONTROL initialize");
 		
 			try {
-				Parent allMovie_SUB = FXMLLoader.load(getClass().getResource("Sub1.fxml"));
+				Parent allMovie_SUB = FXMLLoader.load(getClass().getResource("MovieMenu.fxml"));
 				centrePane.getChildren().clear();
 				centrePane.getChildren().addAll(allMovie_SUB);
 			} catch (IOException e1) {
@@ -77,15 +79,15 @@ public class MenuControl {
 	        
 	    //加载全部影片界面
 	        try {
-	        	System.out.println("sub1 initialize");
+	        	System.out.println("MovieMenu initialize");
 	        	
 		        FXMLLoader fxmlLoader = new FXMLLoader();
-		        fxmlLoader.setLocation(getClass().getResource("Sub1.fxml"));
+		        fxmlLoader.setLocation(getClass().getResource("MovieMenu.fxml"));
 		        fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
 		        sbRoot = (javafx.scene.Parent) fxmlLoader.load(
-		                       getClass().getResource("Sub1.fxml").openStream());
-		        sub1Control=(Sub1Control)fxmlLoader.getController();
-		        
+		                       getClass().getResource("MovieMenu.fxml").openStream());
+		        sub1Control=(movieMenuControl)fxmlLoader.getController();
+		      
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				System.out.println(" Some module of Sub1 was missing ");
@@ -114,7 +116,7 @@ public class MenuControl {
 			sbRoot.getStylesheets().add(getClass().getResource(originCSS).toExternalForm());
 			
 			centrePane.getChildren().clear();
-			    if(playerControl.getStatus() == 0) {
+			    if(playerControl.getBackSide().getStatus() == 0) {
 			    	playerControl.setMediaURL("movie\\China Eastern Airlines B777-300ER Safety video (English).mp4");
 			    	playerControl.mediaPlay();
 			    }
@@ -123,8 +125,8 @@ public class MenuControl {
 	}
 	
 	public void diliverControler() {
-		playerControl.setMenuControl(mcControl);
-		sub1Control.setFatherControler(playerControl, centrePane, pcRoot);
+		playerControl.getBackSide().setMenuControl(mcControl);
+		sub1Control.backSideStart(playerControl,sub1Control,centrePane, pcRoot);
 	}
 	
 	public void startKeyListening() {
@@ -154,7 +156,7 @@ public class MenuControl {
 	@FXML
 	public void mediaPlay() {
 		    centrePane.getChildren().clear();
-		    if(playerControl.getStatus() == 0) {
+		    if(playerControl.getBackSide().getStatus() == 0) {
 		    	playerControl.setMediaURL("movie\\China Eastern Airlines B777-300ER Safety video (English).mp4");
 		    	playerControl.mediaPlay();
 		    }
@@ -177,7 +179,7 @@ public class MenuControl {
 			
 			centrePane.getChildren().clear();
 			opControl.setRoot(opRoot, sbRoot, pcRoot,mcRoot);
-			opControl.setControler(sub1Control);
+			opControl.setMovieMenu(sub1Control.getBackSide());
 			centrePane.getChildren().addAll(opRoot);	
 	}
 	

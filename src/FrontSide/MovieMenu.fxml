@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="sub1Pane" prefHeight="555.0" prefWidth="866.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontSide.Sub1Control">
+<AnchorPane fx:id="sub1Pane" prefHeight="555.0" prefWidth="866.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontSide.movieMenuControl">
 
    <children>
   <AnchorPane fx:id="subAnchorPane1" minHeight="0.0" minWidth="0.0" prefHeight="555.0" prefWidth="866.0">
@@ -57,8 +57,8 @@
             <ImageView fx:id="imageView4" fitHeight="340.0" fitWidth="245.0" layoutX="520.0" layoutY="130.0" onMouseClicked="#clickView4" pickOnBounds="true" preserveRatio="true" />
       
                         <ImageView fx:id="imageView3" fitHeight="400.0" fitWidth="288.0" layoutX="289.0" layoutY="100.0" onMouseClicked="#clickView3" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="right" layoutX="623.0" layoutY="480.0" mnemonicParsing="false" opacity="0.4" prefHeight="40.0" prefWidth="40.0" />
-            <Button fx:id="left" layoutX="191.0" layoutY="480.0" mnemonicParsing="false" opacity="0.4" prefHeight="40.0" prefWidth="40.0" />
+            <Button fx:id="right" layoutX="623.0" layoutY="480.0" mnemonicParsing="false" onAction="#clickRight" opacity="0.4" prefHeight="40.0" prefWidth="40.0" />
+            <Button fx:id="left" layoutX="191.0" layoutY="480.0" mnemonicParsing="false" onAction="#clickLeft" opacity="0.4" prefHeight="40.0" prefWidth="40.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="subAnchorPane2" prefHeight="555.0" prefWidth="865.0">
