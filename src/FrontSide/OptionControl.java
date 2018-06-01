@@ -1,5 +1,10 @@
 package FrontSide;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Properties;
+
 import Model.MovieMenu;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -40,6 +45,11 @@ public class OptionControl {
 	private String language = "CHINESE";
 	private String cssName = "DEFAULT";
 	
+	private String companyName = null;
+	private String companyPicture1 = null;
+	private String companyPicture2 = null;
+	private String companyVideo = null;
+	
 	private EventHandler<KeyEvent> handler = new EventHandler<KeyEvent>() {
 
 		@Override
@@ -76,7 +86,26 @@ public class OptionControl {
 		this.menuControl = menuControl;
 	}
 	
-	
+	@FXML
+	public void initialize() {
+		//加载Properties 配置文件
+		Properties userDefault = new Properties();
+		FileInputStream inputStream = null;
+		try {
+			inputStream = new FileInputStream("userDefault.properties");
+			userDefault.load(new InputStreamReader(inputStream, "UTF-8"));
+			inputStream.close();
+			
+			companyName = userDefault.getProperty("companyName");
+			companyPicture1 = userDefault.getProperty("companyPicture1");
+			companyPicture2 = userDefault.getProperty("companyPicture2");
+		    companyVideo = userDefault.getProperty("companyVideo");
+		    
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+			
+	}
 	
 	@FXML public void selectWhite() {
 		System.out.println("1");

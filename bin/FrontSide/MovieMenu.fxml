@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="sub1Pane" prefHeight="555.0" prefWidth="866.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontSide.movieMenuControl">
+<AnchorPane fx:id="sub1Pane" prefHeight="555.0" prefWidth="866.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontSide.MovieMenuControl">
 
    <children>
   <AnchorPane fx:id="subAnchorPane1" minHeight="0.0" minWidth="0.0" prefHeight="555.0" prefWidth="866.0">

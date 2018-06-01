@@ -9,7 +9,7 @@ import Data.MainMovieData;
 import Data.WebCrawerTools;
 import FrontSide.MenuControl;
 import FrontSide.PlayerControl;
-import FrontSide.movieMenuControl;
+import FrontSide.MovieMenuControl;
 import javafx.scene.Parent;
 
 import javafx.scene.layout.AnchorPane;
@@ -26,7 +26,7 @@ import javafx.scene.layout.AnchorPane;
 public class MovieMenu  {
 	
 	private MenuControl menuControl; //功能栏控制器
-	private movieMenuControl frontSide; //对应的前端对象
+	private MovieMenuControl frontSide; //对应的前端对象
 	private PlayerControl playerControl; //播放器控制对象
 	private AnchorPane centrePane; //界面中部可替换布局
 	private Parent mediaPlayerRoot;//播放器Parent
@@ -43,7 +43,7 @@ public class MovieMenu  {
 	
 	
 	/**初始化上级对象**/
-    public void setFatherObject(PlayerControl playerControl,movieMenuControl frontSide 
+    public void setFatherObject(PlayerControl playerControl,MovieMenuControl frontSide 
 			                    ,AnchorPane centrePane,Parent root,MenuControl menuControl) {
 		this.playerControl = playerControl; 
 		this.frontSide = frontSide;
@@ -67,14 +67,14 @@ public class MovieMenu  {
     	this.language = language;
     	Properties pps = new Properties();
     	try {
-    		FileInputStream inputStream = new FileInputStream("Language.properties");
+    		FileInputStream inputStream = new FileInputStream("language.properties");
 			pps.load(new InputStreamReader(inputStream, "UTF-8"));
 			frontSide.changeLanguage(pps, language);
 			if(nowMovieUrl!=null) {
 				frontSide.showInform(getInformList(nowMovieUrl));
 			}		
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
    

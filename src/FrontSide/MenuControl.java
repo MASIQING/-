@@ -1,8 +1,9 @@
 package FrontSide;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-
-import Model.MovieMenu;
+import java.io.InputStreamReader;
+import java.util.Properties;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.util.Duration;
+
 
 /**
  * 控制左侧的菜单选择栏
@@ -32,7 +33,7 @@ public class MenuControl {
 	@FXML private Button nowPlaying;
 	private MenuControl mcControl;
 	private PlayerControl playerControl;
-	private movieMenuControl sub1Control;
+	private MovieMenuControl sub1Control;
 	private OptionControl opControl;
 	private Parent mcRoot;
 	private Parent opRoot;
@@ -41,6 +42,11 @@ public class MenuControl {
 	private String originCSS = "css\\CSS White.css";
 	private String focusedCss = getClass().getResource("css\\CSS leftPaneButton.css").toExternalForm();
 	private int y = 0;
+	
+	private String companyName = null;
+	private String companyPicture1 = null;
+	private String companyPicture2 = null;
+	private String companyVideo = null;
 	
 	private EventHandler<KeyEvent> leftPaneHandler = new EventHandler<KeyEvent>() {
 		@Override
@@ -104,78 +110,92 @@ public class MenuControl {
 	@FXML
 	public void initialize() {
 		
-		System.out.println("MENUCONTROL initialize");
+		//加载Properties 配置文件
+		Properties userDefault = new Properties();
+		FileInputStream inputStream = null;
+		try {
+			inputStream = new FileInputStream("userDefault.properties");
+			userDefault.load(new InputStreamReader(inputStream, "UTF-8"));
+			inputStream.close();
+			companyName = userDefault.getProperty("companyName");
+			companyPicture1 = userDefault.getProperty("companyPicture1");
+			companyPicture2 = userDefault.getProperty("companyPicture2");
+	        companyVideo = userDefault.getProperty("companyVideo");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
-			try {
-				Parent allMovie_SUB = FXMLLoader.load(getClass().getResource("MovieMenu.fxml"));
-				centrePane.getChildren().clear();
-				centrePane.getChildren().addAll(allMovie_SUB);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+		
+		
+	
+		try {
+			Parent allMovie_SUB = FXMLLoader.load(getClass().getResource("MovieMenu.fxml"));
+			centrePane.getChildren().clear();
+			centrePane.getChildren().addAll(allMovie_SUB);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		 
 		//加载视频播放器
-	        try {
-	        	System.out.println("playerControl initialize");
+	    try {
+	        System.out.println("playerControl initialize");
 	        	
-	        	FXMLLoader fxmlLoader = new FXMLLoader();
-	 	        fxmlLoader.setLocation(getClass().getResource("MediaPlay.fxml"));
-	 	        fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
-				pcRoot = (javafx.scene.Parent) fxmlLoader.load(
-						       getClass().getResource("MediaPlay.fxml").openStream());
-				playerControl=(PlayerControl)fxmlLoader.getController();
+	        FXMLLoader fxmlLoader = new FXMLLoader();
+	 	    fxmlLoader.setLocation(getClass().getResource("MediaPlay.fxml"));
+	 	    fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
+			pcRoot = (javafx.scene.Parent) fxmlLoader.load(
+			    getClass().getResource("MediaPlay.fxml").openStream());
+			playerControl=(PlayerControl)fxmlLoader.getController();
 				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println(" Some module of MediaPlay was missing ");
-				e.printStackTrace();
-			}
+		} catch (IOException e) {
+			System.out.println(" Some module of MediaPlay was missing ");
+			e.printStackTrace();
+		}
 	        
 	        
 	    //加载全部影片界面
-	        try {
-	        	System.out.println("MovieMenu initialize");
+	    try {
+	        System.out.println("MovieMenu initialize");
 	        	
-		        FXMLLoader fxmlLoader = new FXMLLoader();
-		        fxmlLoader.setLocation(getClass().getResource("MovieMenu.fxml"));
-		        fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
-		        sbRoot = (javafx.scene.Parent) fxmlLoader.load(
-		                       getClass().getResource("MovieMenu.fxml").openStream());
-		        sub1Control=(movieMenuControl)fxmlLoader.getController();
+		    FXMLLoader fxmlLoader = new FXMLLoader();
+		    fxmlLoader.setLocation(getClass().getResource("MovieMenu.fxml"));
+		    fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
+		    sbRoot = (javafx.scene.Parent) fxmlLoader.load(
+		       getClass().getResource("MovieMenu.fxml").openStream());
+		    sub1Control=(MovieMenuControl)fxmlLoader.getController();
 		      
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println(" Some module of Sub1 was missing ");
-				e.printStackTrace();
-			}
+	    } catch (IOException e) {
+			System.out.println(" Some module of Sub1 was missing ");
+			e.printStackTrace();
+		}
 	        
 	    //加载设置界面
-	        try {
-	        	System.out.println("optionControl initialize");
+	    try {
+	        System.out.println("optionControl initialize");
 	        	
-		        FXMLLoader fxmlLoader = new FXMLLoader();
-		        fxmlLoader.setLocation(getClass().getResource("OptionControl.fxml"));
-		        fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
-		        opRoot = (javafx.scene.Parent) fxmlLoader.load(
-		                       getClass().getResource("OptionControl.fxml").openStream());
-		        opControl=(OptionControl)fxmlLoader.getController();
-		        opControl.setRoot(opRoot, sbRoot, pcRoot,mcRoot);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.println(" Some module of OptionControl was missing ");
-				e.printStackTrace();
-			}
+		    FXMLLoader fxmlLoader = new FXMLLoader();
+		    fxmlLoader.setLocation(getClass().getResource("OptionControl.fxml"));
+		    fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
+		    opRoot = (javafx.scene.Parent) fxmlLoader.load(
+		        getClass().getResource("OptionControl.fxml").openStream());
+		    opControl=(OptionControl)fxmlLoader.getController();
+		    opControl.setRoot(opRoot, sbRoot, pcRoot,mcRoot);
+		} catch (IOException e) {
+			System.out.println(" Some module of OptionControl was missing ");
+			e.printStackTrace();
+		}
 
-	        opRoot.getStylesheets().add(getClass().getResource(originCSS).toExternalForm());
-			pcRoot.getStylesheets().add(getClass().getResource(originCSS).toExternalForm());
-			sbRoot.getStylesheets().add(getClass().getResource(originCSS).toExternalForm());
+	    opRoot.getStylesheets().add(getClass().getResource(originCSS).toExternalForm());
+		pcRoot.getStylesheets().add(getClass().getResource(originCSS).toExternalForm());
+		sbRoot.getStylesheets().add(getClass().getResource(originCSS).toExternalForm());
 			
-			centrePane.getChildren().clear();
-		    centrePane.getChildren().addAll(sbRoot);
+		centrePane.getChildren().clear();
+		centrePane.getChildren().addAll(sbRoot);
 	
-		    leftPane.addEventHandler(KeyEvent.KEY_PRESSED, leftPaneHandler);
+		leftPane.addEventHandler(KeyEvent.KEY_PRESSED, leftPaneHandler);
 	}
 	
 	public void diliverControler() {
@@ -210,7 +230,7 @@ public class MenuControl {
 	public void mediaPlay() {
 		    centrePane.getChildren().clear();
 		    if(playerControl.getBackSide().getStatus() == 0) {
-		    	playerControl.setMediaURL("movie\\China Eastern Airlines B777-300ER Safety video (English).mp4");
+		    	playerControl.setMediaURL("movie\\"+companyVideo);
 		    	playerControl.mediaPlay();
 		    }
 	        centrePane.getChildren().addAll(pcRoot);

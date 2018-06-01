@@ -33,7 +33,7 @@ import javafx.scene.text.Text;
  * @author 马思清
  *
  * **/
-public class movieMenuControl  {
+public class MovieMenuControl  {
 	@FXML private AnchorPane sub1Pane;
 	@FXML private AnchorPane subAnchorPane1;
 	@FXML private AnchorPane subAnchorPane2;
@@ -144,14 +144,14 @@ public class movieMenuControl  {
 			//返回左侧功能栏
 			if(x==-1) {
 				MenuControl menuControl = backSide.getMenuControl();
-				//初始化左侧功能栏的焦点css
+				//移动焦点至左侧功能栏并设置css
 				menuControl.leftPaneFocus(0);
 			}
 			
 			//返回左侧功能栏
 			if(key.getCode() == KeyCode.BACK_SPACE){
 				MenuControl menuControl = backSide.getMenuControl();
-				//初始化左侧功能栏的焦点css
+				//移动焦点至左侧功能栏并设置css
 				menuControl.leftPaneFocus(0);
 			}
 		}  
@@ -195,6 +195,18 @@ public class movieMenuControl  {
 		@Override
 		public void handle(KeyEvent key) {
 			// TODO Auto-generated method stub
+			
+			if(key.getCode() == KeyCode.RIGHT){
+				backSide.rightAction();
+				key.consume();
+				//System.out.println("right1");
+			}
+			if(key.getCode() == KeyCode.LEFT){
+				backSide.leftAction();
+				key.consume();
+				//System.out.println("left1");
+			}
+			 
 			//返回
 			if(key.getCode() == KeyCode.BACK_SPACE){
 				clickBackToMenu();
@@ -250,7 +262,7 @@ public class movieMenuControl  {
     }
 	
     /**后端初始化并启动**/
-    public void backSideStart(PlayerControl playerControl,movieMenuControl frontSide, 
+    public void backSideStart(PlayerControl playerControl,MovieMenuControl frontSide, 
         AnchorPane centrePane, Parent mediaPlayerRoot,MenuControl menuControl) {
     	
     	backSide.setFatherObject(playerControl, frontSide, centrePane, mediaPlayerRoot,menuControl);
@@ -327,8 +339,8 @@ public class movieMenuControl  {
 	public void showPic(String picUrl,int id,boolean error,String language) {
 		
         if(error==true) {
-        	InputStream errorImgCN = movieMenuControl.class.getResourceAsStream("frontSidePicture\\noMovie(CN).jpg");
-        	InputStream errorImgEN = movieMenuControl.class.getResourceAsStream("frontSidePicture\\noMovie(EN).jpg");
+        	InputStream errorImgCN = MovieMenuControl.class.getResourceAsStream("frontSidePicture\\noMovie(CN).jpg");
+        	InputStream errorImgEN = MovieMenuControl.class.getResourceAsStream("frontSidePicture\\noMovie(EN).jpg");
         	Image img = null;
         	if(language.equals("CHINESE")) {
         		img = new Image(errorImgCN);
@@ -344,7 +356,7 @@ public class movieMenuControl  {
         	
         	
 		}else {
-		    Image img = new Image(movieMenuControl.class.getResourceAsStream("moviePicture\\"+picUrl));
+		    Image img = new Image(MovieMenuControl.class.getResourceAsStream("moviePicture\\"+picUrl));
 		    
 		    switch(id) {
 		    default: ;
