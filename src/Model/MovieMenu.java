@@ -17,7 +17,7 @@ import javafx.scene.layout.AnchorPane;
 
 /**
  * 影片界面后端程序
- * @version 2018/5/27
+ * @version 2018/6/1
  * 
  * @author 马思清
  * @author 李晶晶
@@ -116,7 +116,7 @@ public class MovieMenu  {
 			
 			String searchName = name.substring(i+1);
 			searchName = name.substring(i+1,k+i);
-			String introduction = WebCrawerTools.paZhongWen(searchName);
+			String introduction = WebCrawerTools.getIntroductionCN(searchName);
 			System.out.println("SearchName  "+searchName);
 			inform[3] = introduction;
 			
@@ -144,7 +144,7 @@ public class MovieMenu  {
 			String searchName = name.substring(i+1);
 			searchName = name.substring(i+1,k+i);
 			System.out.println("SearchName  "+searchName);
-			String introduction = WebCrawerTools.paYingWen(searchName);
+			String introduction = WebCrawerTools.getIntroductionEN(searchName);
 			inform[3] = introduction;
 			
 			String reg = "[^A-z |]";
@@ -223,6 +223,7 @@ public class MovieMenu  {
 		
 		
 	}
+	
 	/**显示报错图片**/
 	public void showPicError() {
 		frontSide.showPic("ERROR", 3,true,language);

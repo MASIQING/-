@@ -8,12 +8,7 @@ import org.jsoup.select.Elements;
 
 public class WebCrawerTools {
 	
-	public static void main(String[] args) {
-		System.out.println(paYingWen("My_Fair_Lady"));
-	}
-	
-	
-	public static String paZhongWen(String movieName){
+	public static String getIntroductionCN(String movieName){
 		
 		String urlString = "https://baike.baidu.com/item/"+movieName;
 		String content = "no introduction";
@@ -36,7 +31,7 @@ public class WebCrawerTools {
 		return content;
 	}
 	
-	public static String paYingWen(String movieName) {
+	public static String getIntroductionEN(String movieName) {
 		
 		if(movieName.equals("Pans_Labyrinth")) {
 			movieName = "Pan's_Labyrinth";

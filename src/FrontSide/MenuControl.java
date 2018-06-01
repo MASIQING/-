@@ -17,14 +17,13 @@ import javafx.util.Duration;
 /**
  * 控制左侧的菜单选择栏
  * 
- * @version 2018/5/27
+ * @version 2018/6/1
  * 
  * @author 马思清
  * 
  * **/
 public class MenuControl {
     
-	
     @FXML private AnchorPane mainPane;
 	@FXML private AnchorPane centrePane;
 	@FXML private AnchorPane leftPane;
@@ -41,87 +40,41 @@ public class MenuControl {
 	private Parent sbRoot;
 	private String originCSS = "css\\CSS White.css";
 	private String focusedCss = getClass().getResource("css\\CSS leftPaneButton.css").toExternalForm();
-	int y = 0;
+	private int y = 0;
 	
 	private EventHandler<KeyEvent> leftPaneHandler = new EventHandler<KeyEvent>() {
 		@Override
 		public void handle(KeyEvent key) {
-			
 			if(key.getCode() == KeyCode.UP) {
+				//限制运动范围
 				if(y>0) {
 					y--;
 				}
 				showCssInButton(y);
 				key.consume();
 			}
-			
 			if(key.getCode() == KeyCode.DOWN) {
+				//限制运动范围
 				if(y<2) {
 					y++;
 				}
 				showCssInButton(y);
 				key.consume();
 			}
-			
 			if(key.getCode() == KeyCode.ENTER) {
 				enterSubPane();
 				key.consume();
 			}
-			
-            if(key.getCode() == KeyCode.RIGHT) {
+			if(key.getCode() == KeyCode.RIGHT) {
             	enterSubPane();
             	key.consume();
 			}
 		}
 	};
 	
-	public void enterSubPane() {
-		allMovie.getStylesheets().clear();
-		nowPlaying.getStylesheets().clear();
-		settings.getStylesheets().clear();
-		switch(y) {
-			default:{}	
-			case 0:{
-				clickedAllMovie();
-				break;
-			}
-			case 1:{
-				mediaPlay();
-				break;
-			}
-			case 2:{
-				clickedSettings();
-				break;
-			}
-	    }
-		System.out.println("DELETEFOCUS" +leftPane.isFocused());
-	}
-	
-	public void showCssInButton(int y) {
-		allMovie.getStylesheets().clear();
-		nowPlaying.getStylesheets().clear();
-		settings.getStylesheets().clear();
-		
-		switch(y) {
-		    default:{}
-			case 0:{
-				allMovie.getStylesheets().add(focusedCss);
-				break;
-			}
-			case 1:{
-				nowPlaying.getStylesheets().add(focusedCss);
-				break;
-			}
-			case 2:{
-				settings.getStylesheets().add(focusedCss);
-				break;
-			}
-		}
-	}
 	
 	public void leftPaneFocus(int y) {
 		leftPane.requestFocus();
-		System.out.println("LEFT_PANE FOCUSED "+leftPane.isFocused());
 		switch(y) {
 			default:{}
 			case 0:{
@@ -142,6 +95,10 @@ public class MenuControl {
 	
 	public void setMenuControl(MenuControl mcControl) {
 		this.mcControl = mcControl;
+	}
+	
+	public void setParent(Parent mcRoot) {
+	    	this.mcRoot = mcRoot;
 	}
 	
 	@FXML
@@ -279,7 +236,48 @@ public class MenuControl {
 			centrePane.getChildren().addAll(opRoot);	
 	}
 	
-    public void setParent(Parent mcRoot) {
-    	this.mcRoot = mcRoot;
-    }
+   
+    
+    private void enterSubPane() {
+		allMovie.getStylesheets().clear();
+		nowPlaying.getStylesheets().clear();
+		settings.getStylesheets().clear();
+		switch(y) {
+			default:;	
+			case 0:{
+				clickedAllMovie();
+				break;
+			}
+			case 1:{
+				mediaPlay();
+				break;
+			}
+			case 2:{
+				clickedSettings();
+				break;
+			}
+	    }
+	}
+	
+	private void showCssInButton(int y) {
+		allMovie.getStylesheets().clear();
+		nowPlaying.getStylesheets().clear();
+		settings.getStylesheets().clear();
+		switch(y) {
+		    default:{}
+			case 0:{
+				allMovie.getStylesheets().add(focusedCss);
+				break;
+			}
+			case 1:{
+				nowPlaying.getStylesheets().add(focusedCss);
+				break;
+			}
+			case 2:{
+				settings.getStylesheets().add(focusedCss);
+				break;
+			}
+		}
+	}
+	
 }

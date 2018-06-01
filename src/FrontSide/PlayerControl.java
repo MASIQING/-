@@ -21,10 +21,10 @@ import javafx.util.Duration;
 /**
  * 控制播放器的播放行为<br>
  * 包括播放器进度条和音量控制
- * @version 2018/5/27
+ * @version 2018/6/1
  * 
  * @author 马思清
- *
+ * @author 李晶晶
  * **/
 public class PlayerControl {
 	   
