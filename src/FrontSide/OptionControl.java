@@ -1,10 +1,13 @@
 package FrontSide;
 
 import Model.MovieMenu;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 
 /**
@@ -33,8 +36,25 @@ public class OptionControl {
 	private Parent pcRoot;
 	private Parent mcRoot;
 	private MovieMenu movieMenub;
+	private MenuControl menuControl;
 	private String language = "CHINESE";
 	private String cssName = "DEFAULT";
+	
+	private EventHandler<KeyEvent> handler = new EventHandler<KeyEvent>() {
+
+		@Override
+		public void handle(KeyEvent key) {
+			//返回左侧功能栏
+			if(key.getCode() == KeyCode.BACK_SPACE) {
+				//移动焦点至左侧功能栏并设置css
+				menuControl.leftPaneFocus(2);
+				key.consume();
+			}
+			
+		}
+		
+	};
+	
 	
 	/**
 	 * 初始化，传入四个界面文档的parent
@@ -49,11 +69,13 @@ public class OptionControl {
     	this.sbRoot = sbRoot;
     }
 	/**
-	 * 初始化，传入电影选择界面的控制器
+	 * 初始化，传入电影选择界面,和左侧功能栏的控制器
 	 * **/
-	public void setMovieMenu(MovieMenu movieMenub) {
+	public void setMovieMenu(MovieMenu movieMenub,MenuControl menuControl) {
 		this.movieMenub = movieMenub;
+		this.menuControl = menuControl;
 	}
+	
 	
 	
 	@FXML public void selectWhite() {

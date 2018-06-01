@@ -232,7 +232,7 @@ public class MenuControl {
 	public void clickedSettings() {
 			centrePane.getChildren().clear();
 			opControl.setRoot(opRoot, sbRoot, pcRoot,mcRoot);
-			opControl.setMovieMenu(sub1Control.getBackSide());
+			opControl.setMovieMenu(sub1Control.getBackSide(),mcControl);
 			centrePane.getChildren().addAll(opRoot);	
 	}
 	
