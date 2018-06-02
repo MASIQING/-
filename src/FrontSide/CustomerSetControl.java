@@ -24,10 +24,12 @@ import javafx.stage.Stage;
 
 public class CustomerSetControl {
 
-	@FXML TextField movieName;
+	@FXML TextField movieNameCN;
+	@FXML TextField movieNameEN;
 	@FXML TextField movieUrl;
 	@FXML TextField picUrl;
-	@FXML TextField movieCountry;
+	@FXML TextField movieCountryCN;
+	@FXML TextField movieCountryEN;
 	@FXML TextField year;
 	@FXML TextField type;
 	@FXML TextField deleteMovieName;
@@ -44,10 +46,12 @@ public class CustomerSetControl {
 	@FXML Button setPic2Search;
 	@FXML Button setVideoSearch;
 	@FXML Button companyConfirm;
+	@FXML Button synSheet;
 	@FXML ComboBox<String> typeChoose;
 	@FXML ImageView picture1Preview;
 	@FXML ImageView picture2Preview;
 	@FXML Text companyName;
+	@FXML TextArea movieInformArea;
 	
 	
 	private ObservableList<String> typeItems;
@@ -81,6 +85,9 @@ public class CustomerSetControl {
 		picture1Preview.setImage(pic1);
 		picture2Preview.setImage(pic2);
 		
+		String inform = backSide.getMovieInform();
+		movieInformArea.setText(inform);
+		
 	}
 	
 	
@@ -92,6 +99,11 @@ public class CustomerSetControl {
 	    File file =  fileChooser.showOpenDialog(fileChooserStage); 
 	    return file;
 	}
+	
+	@FXML
+	public void clickSynSheet() {
+		backSide.addNewMoviesSheet();
+	}
 
 	@FXML
 	public void clickConfirmAdd() {
@@ -101,8 +113,18 @@ public class CustomerSetControl {
         
         if("mp4".equals(filmUrlType)) {
         	if("jpg".equals(picUrlType.toLowerCase())) {
-        		backSide.copyMovieAndPic(movieUrl.getText(),picUrl.getText(),movieName.getText());	
-        		backSide.addNewMovies(movieName.getText(),type.getText(),year.getText());
+        		String chineseName = movieNameCN.getText();
+        		String englishName = movieNameEN.getText();
+        		String countryCN = movieCountryCN.getText();
+        		String countryEN = movieCountryEN.getText();
+        		boolean nonEmpty = chineseName!=null && englishName!=null
+        			&& countryCN!=null && countryEN!=null;
+        		if(nonEmpty) {
+        			String movieName = "$"+englishName+"-&"+chineseName+"-";
+        			String country =  "1"+countryEN+"-2"+countryCN+"-";
+        		    backSide.copyMovieAndPic(movieUrl.getText(),picUrl.getText(),movieName);	
+        		    backSide.addNewMovies(movieName,type.getText(),country);
+        		}
         	}else{
         		System.out.println("Picture File Is Wrong "+picUrlType);
         	}

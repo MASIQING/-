@@ -205,8 +205,10 @@ public class DatabaseOperation {
 			stmt.close();
 			conn.close();
 		} catch (SQLException se) {
+			//System.out.println("SQL Error");
 			se.printStackTrace();
 		} catch (Exception e) {
+			//System.out.println("SQL Error");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -214,7 +216,7 @@ public class DatabaseOperation {
 					stmt.close();
 				}
 			} catch (SQLException se1) {
-
+				//System.out.println("SQL Error");
 			}
 			try {
 				if (conn != null) {

@@ -7,12 +7,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
+import Data.MovieManager;
+
 
 public class CustomerSet {
 	
 	private Properties userDefault = new Properties();
 	private String nowMovieUrl = null;
 	private String nowPicUrl = null;
+	private MovieManager manager = new MovieManager();
+	private String[][] movieInform;
 	
 	public CustomerSet(){
 	    init();
@@ -37,6 +41,30 @@ public class CustomerSet {
 
 	public void addNewMovies(String movieName,String movieType,String year) {
 		
+	}
+	
+	public String getMovieInform(){
+		movieInform = manager.getAllMovieInformation();
+		StringBuffer informBuffer = new StringBuffer();
+		String content = null;
+		for(String[] inform : movieInform) {
+			content = inform[0]+" "+inform[3]+
+				inform[4]+" "+inform[5]+"\n";
+			informBuffer.append(content);
+		}
+		return informBuffer.toString();
+	}
+	
+	public void addNewMoviesSheet() {
+	    String moviesURL = "Data\\movies.csv";
+	    String relationURL = "Data\\relations.csv";
+		try {
+			manager.addMovie(moviesURL);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void deleteMovies(String movieName) {

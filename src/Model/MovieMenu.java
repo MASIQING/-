@@ -62,7 +62,9 @@ public class MovieMenu  {
     	return menuControl;
     }
 	
-	/**改变语言**/
+	/**改变语言
+	 * @Parameters:language 
+	 * **/
     public void changeLanguage(String language) {
     	this.language = language;
     	Properties pps = new Properties();

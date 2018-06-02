@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.Scanner;
  *
  */
 public class MovieManager {
-	private static Scanner scanner = new Scanner(System.in);
+	static Scanner scanner = new Scanner(System.in);
 
 	/**
 	 * 字符串转化整数
@@ -23,8 +24,7 @@ public class MovieManager {
 	 * 将字符串的整数转成整数
 	 * </p>
 	 * 
-	 * @param strInt
-	 *            字符串
+	 * @param strInt 字符串
 	 * @return num 整数
 	 */
 	private static int IntegerConvert(String strInt) {
@@ -44,8 +44,7 @@ public class MovieManager {
 	 * 这个方法从.csv文件中读取电影信息，添加到数据库中
 	 * </p>
 	 * 
-	 * @param fileUrl
-	 *            .csv文件路径
+	 * @param fileUrl .csv文件路径
 	 * @throws IOException
 	 */
 	public static void addMovie(String fileUrl) throws IOException {
@@ -75,9 +74,9 @@ public class MovieManager {
 				yearReleased = IntegerConvert(info[6]);
 				runTime = IntegerConvert(info[7]);
 				dbop.query(
-						"insert into films (movieid, movie_name, photo_url, movie_url, country, year_released, runtime) "
-								+ "values('" + id + "','" + name + "','" + PhotoUrl + "','" + MovieUrl + "','" + nation
-								+ "','" + yearReleased + "','" + runTime + "')");
+					"insert into films (movieid, movie_name, photo_url, movie_url, country, year_released, runtime) "
+					     + "values('" + id + "','" + name + "','" + PhotoUrl + "','" + MovieUrl + "','" + nation
+					     + "','" + yearReleased + "','" + runTime + "')");
 				dbop.query("insert into type_film (filmid, typeid) " + "values('" + id + "','" + typeid + "')");
 			}
 
@@ -91,6 +90,42 @@ public class MovieManager {
 			}
 		}
 	}
+	/**
+	 * 添加多类型的电影类型
+	 * <p>
+	 * 这个方法从.csv文件中读取电影信息，添加到数据库中
+	 * </p>
+	 * @param fileUrl .csv文件路径
+	 * @throws IOException
+	 */
+	public static void addMutiType(String fileUrl) throws IOException {
+		int typeid = 0;//电影类型序号
+		int filmid = 0;// 电影序号
+		BufferedReader in = null;
+		String line;
+		try {
+			File file = new File(fileUrl);
+			in = new BufferedReader(new FileReader(file));
+			String[] info = new String[2];
+			DatabaseOperation dbop = new DatabaseOperation();
+			while ((line = in.readLine()) != null) {
+				info = line.split(",");
+				filmid = IntegerConvert(info[0]);
+				typeid = IntegerConvert(info[1]);
+				dbop.query("insert into type_film (filmid, typeid) " + "values('" + filmid + "','" + typeid + "')");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (in != null) {
+				System.out.println("添加电影类型信息成功");
+				System.out.println("关闭文件输入");
+				in.close();
+			}
+		}
+	}
+
 
 	/**
 	 * 删除电影
@@ -144,6 +179,7 @@ public class MovieManager {
 		System.out.println("2 查看所有电影");
 		System.out.println("3 删除电影");
 		System.out.println("4 查看不同分类电影");
+		System.out.println("5 添加多类型电影关系");
 		System.out.println("请选择：");
 		int choice = scanner.nextInt();// 选择功能
 		String judge;// 判断是否返回主菜单
@@ -188,6 +224,22 @@ public class MovieManager {
 				StartMainMeun();
 			}
 			break;
+		case 5:
+			System.out.println("请输入电影多类型信息文件地址");
+			String fileUrl1 = scanner.next();
+			try {
+				addMutiType(fileUrl1);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				System.out.println("是否返回主菜单？");
+				judge = scanner.next();
+				if (judge.equals("是")) {
+					StartMainMeun();
+				}
+			}
+			break;
 		}
 	}
 
@@ -218,6 +270,7 @@ public class MovieManager {
 	 * </p>
 	 */
 	public static String[][] getAllMovieInformation() {
+		// TODO Auto-generated method stub
 		DatabaseOperation dbop = new DatabaseOperation();
 		String[][] movieinfo = dbop.dataToArray();
 		return movieinfo;
@@ -228,10 +281,10 @@ public class MovieManager {
 	 * 返回电影信息二维表的方法
 	 * </p>
 	 */
-	public static String[][] getTypeMovieInformation(String type){
+	public String[][] getTypeMovieInformation(String type){
 		DatabaseOperation dbop = new DatabaseOperation();
 		String[][] movieinfo = dbop.TypedataToArray(type);
 		return movieinfo;
 	}
-	
+
 }
