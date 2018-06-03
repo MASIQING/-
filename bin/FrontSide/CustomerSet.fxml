@@ -18,13 +18,13 @@
                      <children>
                         <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="542.0" prefWidth="425.0">
                            <content>
-                              <TextArea fx:id="movieInformArea" prefHeight="619.0" prefWidth="418.0" />
+                              <TextArea fx:id="movieInformArea" prefHeight="738.0" prefWidth="605.0" />
                            </content>
                         </ScrollPane>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="308.0" layoutX="450.0" layoutY="14.0" stroke="#a4a1a1" strokeType="INSIDE" width="439.0" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="125.0" layoutX="450.0" layoutY="431.0" stroke="#a4a1a1" strokeType="INSIDE" width="439.0" />
                         <Text layoutX="460.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="新增影片（手动）：" />
-                        <Text layoutX="459.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="删除影片（按其中一项或多项查找）" />
+                        <Text layoutX="459.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="删除影片" />
                         <Text layoutX="460.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="影片地址：" />
                         <Text layoutX="460.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="名称：" />
                         <Text layoutX="460.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="图片地址：" />
@@ -41,10 +41,8 @@
                         <ComboBox fx:id="typeChoose" layoutX="594.0" layoutY="243.0" prefHeight="23.0" prefWidth="103.0" promptText="类型选择" />
                         <TextField fx:id="type" layoutX="709.0" layoutY="243.0" />
                         <Button fx:id="confirmAdd" layoutX="756.0" layoutY="286.0" mnemonicParsing="false" onAction="#clickConfirmAdd" prefHeight="23.0" prefWidth="116.0" text="确认添加" />
-                        <Text layoutX="460.0" layoutY="482.0" strokeType="OUTSIDE" strokeWidth="0.0" text="名称：" />
-                        <TextField fx:id="deleteMovieName" layoutX="514.0" layoutY="466.0" />
-                        <Text layoutX="460.0" layoutY="509.0" strokeType="OUTSIDE" strokeWidth="0.0" text="影片ID：" />
-                        <TextField fx:id="deleteMovieId" layoutX="514.0" layoutY="494.0" />
+                        <Text layoutX="459.0" layoutY="482.0" strokeType="OUTSIDE" strokeWidth="0.0" text="影片ID：" />
+                        <TextField fx:id="deleteMovieId" layoutX="514.0" layoutY="466.0" />
                         <Button fx:id="confirmDelete" layoutX="754.0" layoutY="522.0" mnemonicParsing="false" onAction="#clivkConfirmDelete" prefHeight="23.0" prefWidth="116.0" text="确认删除" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="95.0" layoutX="450.0" layoutY="329.0" stroke="#a4a1a1" strokeType="INSIDE" width="439.0" />
                         <Text layoutX="459.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="新增影片（根据表格添加）：" />

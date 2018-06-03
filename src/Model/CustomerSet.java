@@ -15,7 +15,6 @@ public class CustomerSet {
 	private Properties userDefault = new Properties();
 	private String nowMovieUrl = null;
 	private String nowPicUrl = null;
-	private MovieManager manager = new MovieManager();
 	private String[][] movieInform;
 	
 	public CustomerSet(){
@@ -44,12 +43,12 @@ public class CustomerSet {
 	}
 	
 	public String getMovieInform(){
-		movieInform = manager.getAllMovieInformation();
+		movieInform = MovieManager.getAllMovieInformation();
 		StringBuffer informBuffer = new StringBuffer();
 		String content = null;
 		for(String[] inform : movieInform) {
-			content = inform[0]+" "+inform[3]+
-				inform[4]+" "+inform[5]+"\n";
+			content = inform[0]+"  "+inform[1]+"  "+
+				inform[4]+"  "+inform[5]+"\n";
 			informBuffer.append(content);
 		}
 		return informBuffer.toString();
@@ -59,7 +58,7 @@ public class CustomerSet {
 	    String moviesURL = "Data\\movies.csv";
 	    String relationURL = "Data\\relations.csv";
 		try {
-			manager.addMovie(moviesURL);
+			MovieManager.addMovie(moviesURL);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -67,12 +66,9 @@ public class CustomerSet {
 		}
 	}
 	
-	public void deleteMovies(String movieName) {
-		
-	}
-	
-	public void deleteMovies(int id) {
-		
+	public void deleteMovies(String id) {
+		int movieId = Integer.parseInt(id);
+		MovieManager.deleteMovie(movieId);
 	}
 	
 	public String checkFile(String fileString) {

@@ -1,11 +1,11 @@
 
 /*左侧选择栏的按钮定义*/
-#But_AllMovie{/*全部影片按钮*/
+#allMovie{/*全部影片按钮*/
 	-fx-background-color: #FFFFFF;
 	-fx-background-image:url(/FrontSide/frontSidePicture/menu.png);
 	-fx-opacity: 0.6;
 }
-#But_AllMovie:hover{
+#allMovie:hover{
 	-fx-background-color: #FFFFFF;
 	-fx-background-image:url(/FrontSide/frontSidePicture/menu.png);
 	-fx-border-color: #272727;
@@ -13,13 +13,13 @@
 }
 
 
-#But_nowPlaying{/*播放器按钮*/
+#nowPlaying{/*播放器按钮*/
 	-fx-background-color: #FFFFFF;
 	-fx-background-image:url(/FrontSide/frontSidePicture/play.png);
 	-fx-opacity: 0.6;
 
 }
-#But_nowPlaying:hover{
+#nowPlaying:hover{
 	-fx-background-color: #FFFFFF;
 	-fx-background-image:url(/FrontSide/frontSidePicture/play.png);
 	-fx-border-color: #272727;
@@ -27,12 +27,12 @@
 }
 
 
-#But_settings{/*设置按钮*/
+#settings{/*设置按钮*/
 	-fx-background-color: #FFFFFF;
 	-fx-background-image:url(/FrontSide/frontSidePicture/setting.png);
 	-fx-opacity: 0.6;
 }
-#But_settings:hover{
+#settings:hover{
 	-fx-background-color: #FFFFFF;
 	-fx-background-image:url(/FrontSide/frontSidePicture/setting.png);
 	-fx-border-color: #272727;
@@ -55,6 +55,7 @@
 /*电影界面设置*/
 #right{
 	-fx-background-image:url(/FrontSide/frontSidePicture/right.png);
+	-fx-opacity: 0.3;
 }
 #right:hover{
 	-fx-border-color: #4F4F4F;
@@ -63,6 +64,7 @@
 }
 #left{
 	-fx-background-image:url(/FrontSide/frontSidePicture/left.png);
+	-fx-opacity: 0.3;
 }
 #left:hover{
 	-fx-border-color: #4F4F4F;

@@ -61,31 +61,34 @@
             <Button fx:id="left" layoutX="191.0" layoutY="480.0" mnemonicParsing="false" onAction="#clickLeft" opacity="0.4" prefHeight="40.0" prefWidth="40.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="subAnchorPane2" prefHeight="555.0" prefWidth="865.0">
+      <AnchorPane fx:id="subAnchorPane2" prefHeight="555.0" prefWidth="866.0">
          <children>
-            <ImageView fx:id="movieInformImage" fitHeight="470.0" fitWidth="360.0" layoutX="51.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="backToMenu" layoutX="471.0" layoutY="466.0" mnemonicParsing="false" onAction="#clickBackToMenu" prefHeight="40.0" prefWidth="161.0" text="返回" />
-            <Button fx:id="nowPlay" layoutX="649.0" layoutY="466.0" mnemonicParsing="false" onAction="#clickNowPlay" prefHeight="40.0" prefWidth="151.0" text="立即播放" />
-            <Text fx:id="movieName" layoutX="452.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="360.0">
+            <ImageView fx:id="movieInformImage" fitHeight="470.0" fitWidth="360.0" layoutX="54.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="backToMenu" layoutX="482.0" layoutY="487.0" mnemonicParsing="false" onAction="#clickBackToMenu" prefHeight="30.0" prefWidth="161.0" text="返回" />
+            <Button fx:id="nowPlay" layoutX="652.0" layoutY="486.0" mnemonicParsing="false" onAction="#clickNowPlay" prefHeight="33.0" prefWidth="151.0" text="立即播放" />
+            <Text fx:id="movieName" layoutX="462.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="360.0">
                <font>
-                  <Font name="Microsoft YaHei" size="35.0" />
+                  <Font name="Microsoft YaHei" size="25.0" />
                </font>
             </Text>
-            <Text fx:id="movieYear" layoutX="465.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="190.0">
-               <font>
-                  <Font name="Microsoft YaHei" size="20.0" />
-               </font>
-            </Text>
-            <Text fx:id="movieCountry" layoutX="554.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="190.0">
+            <Text fx:id="movieYear" layoutX="462.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="190.0">
                <font>
                   <Font name="Microsoft YaHei" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="movieInform" layoutX="469.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="360.0">
+            <Text fx:id="movieCountry" layoutX="652.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="190.0">
+               <font>
+                  <Font name="Microsoft YaHei" size="20.0" />
+               </font>
+            </Text>
+            <Text fx:id="movieInform" layoutX="462.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="360.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#86888a" height="81.0" layoutX="456.0" layoutY="32.0" opacity="0.17" stroke="#0a0a0a" strokeType="INSIDE" width="373.0" />
+            <Line endX="270.0" layoutX="552.0" layoutY="73.0" startX="-90.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#86888a" height="361.0" layoutX="456.0" layoutY="119.0" opacity="0.17" stroke="#0a0a0a" strokeType="INSIDE" width="373.0" />
          </children>
       </AnchorPane>
 

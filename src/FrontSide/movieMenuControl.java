@@ -45,7 +45,7 @@ public class MovieMenuControl  {
 	@FXML private ImageView imageView3;
 	@FXML private ImageView imageView4;
 	@FXML private ImageView imageView5;
-	
+
 	@FXML private Button g00; //全部
 	@FXML private Button g03; //爱情
 	@FXML private Button g13; //科幻
@@ -228,6 +228,23 @@ public class MovieMenuControl  {
     	
     	System.out.println("MOVIE_MENU_CONTROL-INITIALIZED");
         
+    	//加载Properties 配置文件
+    	Properties userDefault = new Properties();
+    	FileInputStream inputStream = null;
+    	try {
+    		inputStream = new FileInputStream("userDefault.properties");
+    		userDefault.load(new InputStreamReader(inputStream, "UTF-8"));
+    		inputStream.close();
+                    
+    		String companyPic1 = userDefault.getProperty("companyPicture1");
+    		Image pic1 = new Image(CustomerSetControl.class.getResourceAsStream("frontSidePicture\\"+companyPic1));
+    		
+    		
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	} 
+    	
     	subAnchorPane1.setVisible(true);
 		subAnchorPane2.setVisible(false);
 		//左右切换电影

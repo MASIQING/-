@@ -133,9 +133,7 @@ public class MovieManager {
 	 * 根据电影序号来删除电影
 	 * </p>
 	 */
-	public static void deleteMovie() {
-		System.out.println("请输入您要删除的电影编号:");
-		int id = scanner.nextInt();
+	public static void deleteMovie(int id) {
 		DatabaseOperation dbop = new DatabaseOperation();
 		dbop.query("delete from type_film where filmid = '" + id + "'");
 		dbop.query("delete from films where movieid = '" + id + "'");
@@ -163,105 +161,11 @@ public class MovieManager {
 		System.out.println("请输入电影类型");
 		String type = scanner.next();
 		dbop.showtype(
-				"select movieid, movie_name, country, year_released, runtime from films join type_film tf on movieid = filmid join types t on t.typeid = tf.typeid where t.type = '"
+			"select movieid, movie_name, country, year_released, runtime from films join type_film tf on movieid "
+			+ "= filmid join types t on t.typeid = tf.typeid where t.type = '"
 						+ type + "'");
 	}
 
-	/**
-	 * 开始电影管理系统的主菜单
-	 * <p>
-	 * 电影管理系统的主菜单，可以支持添加，查看，删除功能
-	 * </p>
-	 */
-	public static void StartMainMeun() {
-		System.out.println("欢迎使用电影管理系统");
-		System.out.println("1 添加电影");
-		System.out.println("2 查看所有电影");
-		System.out.println("3 删除电影");
-		System.out.println("4 查看不同分类电影");
-		System.out.println("5 添加多类型电影关系");
-		System.out.println("请选择：");
-		int choice = scanner.nextInt();// 选择功能
-		String judge;// 判断是否返回主菜单
-		switch (choice) {
-		case 1:
-			System.out.println("请输入电影信息文件地址");
-			String fileUrl = scanner.next();
-			try {
-				addMovie(fileUrl);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				System.out.println("是否返回主菜单？");
-				judge = scanner.next();
-				if (judge.equals("是")) {
-					StartMainMeun();
-				}
-			}
-			break;
-		case 2:
-			showMoList();
-			System.out.println("是否返回主菜单？");
-			judge = scanner.next();
-			if (judge.equals("是")) {
-				StartMainMeun();
-			}
-			break;
-		case 3:
-			deleteMovie();
-			System.out.println("是否返回主菜单？");
-			judge = scanner.next();
-			if (judge.equals("是")) {
-				StartMainMeun();
-			}
-			break;
-		case 4:
-			showTypeMoList();
-			System.out.println("是否返回主菜单？");
-			judge = scanner.next();
-			if (judge.equals("是")) {
-				StartMainMeun();
-			}
-			break;
-		case 5:
-			System.out.println("请输入电影多类型信息文件地址");
-			String fileUrl1 = scanner.next();
-			try {
-				addMutiType(fileUrl1);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				System.out.println("是否返回主菜单？");
-				judge = scanner.next();
-				if (judge.equals("是")) {
-					StartMainMeun();
-				}
-			}
-			break;
-		}
-	}
-
-	/**
-	 * 主方法，启动电影管理系统
-	 * <p>
-	 * 电影管理系统的启动
-	 * </p>
-	 * 
-	 * @param args
-	 * @throws InputMismatchException
-	 */
-	public static void main(String[] args) throws InputMismatchException {
-		// TODO Auto-generated method stub
-		try {
-			StartMainMeun();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
 
 	/**
 	 * 获取电影信息

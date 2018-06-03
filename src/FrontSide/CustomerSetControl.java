@@ -5,11 +5,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Observable;
 import java.util.Properties;
 
 import Model.CustomerSet;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,12 +55,12 @@ public class CustomerSetControl {
 	@FXML Text companyName;
 	@FXML TextArea movieInformArea;
 	
-	
-	private ObservableList<String> typeItems;
+	private ObservableList<String> typeItems = FXCollections.observableArrayList(
+			"全部", "喜剧", "悲剧", "爱情", "动作", "恐怖", "悬疑", "历史",
+		    "儿童", "音乐", "冒险", "科幻", "中国", "欧美", "日韩", "其他"
+    );
 	private FileChooser fileChooser = new FileChooser();
 	private CustomerSet backSide = new CustomerSet();
-	private String[] types = {"全部", "喜剧", "悲剧", "爱情", "动作", "恐怖", "悬疑", "历史",
-	    "儿童", "音乐", "冒险", "科幻", "中国", "欧美", "日韩", "其他"};
 	
 	@FXML
 	public void initialize() {
@@ -87,6 +89,8 @@ public class CustomerSetControl {
 		
 		String inform = backSide.getMovieInform();
 		movieInformArea.setText(inform);
+		
+		typeChoose.setItems(typeItems);
 		
 	}
 	
@@ -117,8 +121,10 @@ public class CustomerSetControl {
         		String englishName = movieNameEN.getText();
         		String countryCN = movieCountryCN.getText();
         		String countryEN = movieCountryEN.getText();
-        		boolean nonEmpty = chineseName!=null && englishName!=null
-        			&& countryCN!=null && countryEN!=null;
+        		
+        		boolean nonEmpty =  !"".equals(chineseName) && !"".equals(englishName) 
+        			&& !"".equals(countryCN) && !"".equals(countryEN);
+        		
         		if(nonEmpty) {
         			String movieName = "$"+englishName+"-&"+chineseName+"-";
         			String country =  "1"+countryEN+"-2"+countryCN+"-";
@@ -135,8 +141,12 @@ public class CustomerSetControl {
 	
 	@FXML
 	public void clivkConfirmDelete() {
+		String id = deleteMovieId.getText();
+		boolean nonEmpty = !"".equals(id);
+		backSide.deleteMovies(id);
 		
 	}
+	
 	@FXML
 	public void clickCompanyConfirm() {
 		String name = setCompanyName.getText();
@@ -144,7 +154,9 @@ public class CustomerSetControl {
 		String url2 = setPicture2Url.getText();
 		String url3 = setCompanyVideoUrl.getText();
 		
-		if(name!=null && url1!= null && url2!= null && url3!=null) {
+		Boolean nonEmpty = !"".equals(name) && !"".equals(url1) && !"".equals(url2) && !"".equals(url3);
+		
+		if(nonEmpty) {
 			backSide.changeAirCompanyTheme(name,url1,url2,url3);
 		}
 		

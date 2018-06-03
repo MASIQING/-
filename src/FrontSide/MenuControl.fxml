@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="555.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontSide.MenuControl">
+<AnchorPane prefHeight="555.0" prefWidth="946.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontSide.MenuControl">
    <children>
-      <BorderPane layoutX="5.0" layoutY="-1.0" prefHeight="555.0" prefWidth="868.0">
+      <BorderPane layoutX="5.0" layoutY="-1.0" prefHeight="555.0" prefWidth="946.0">
          <center>
             <AnchorPane fx:id="centrePane" prefHeight="555.0" prefWidth="866.0" BorderPane.alignment="CENTER" />
          </center>

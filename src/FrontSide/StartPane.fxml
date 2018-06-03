@@ -5,6 +5,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane fx:id="anchorPane" prefHeight="555.0" prefWidth="868.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="FrontSide.StartPaneControl">
+<AnchorPane fx:id="anchorPane" prefHeight="555.0" prefWidth="946.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontSide.StartPaneControl">
 	<!-- TODO Add Nodes -->
 </AnchorPane>
